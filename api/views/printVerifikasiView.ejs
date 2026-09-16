@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Print Hasil Penimbangan</title>
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+  <style>
+    body { 
+	padding: 4px 4px;
+	font-family: Arial, Helvetica, sans-serif;
+    };
+    .col-md-2 {
+      width: 20%;
+    }
+    .col-md-4 {
+      width: 40%;
+    }
+    /* @media print {
+      @page {                
+        size: A4;
+        margin: 10mm;
+      }
+
+      html, body {
+        width: 1024px;
+	font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        margin: 0 auto;
+      }
+    } */
+  </style>
+</head>
+<body>
+
+  <div style="margin: 2px;">
+    <header>
+      <table width="100%" style="border-bottom: solid 2px #000000;">
+        <tbody>
+          <tr>
+            <td style="width: 10%;">
+                <img src="<%= logo %>" width="64" height="66" />
+            </td>
+            <td style="width: 80%; font-weight: bold;">
+                <div style="font-size: 12px;">KEMENTERIAN PERHUBUNGAN</div>
+                <div style="font-size: 12px;">DIREKTORAT JENDERAL PERHUBUNGAN DARAT</div>
+                <div style="font-size: 12px;"><%= data.nama_bptd.toUpperCase() %></div>
+                <div style="font-size: 9px;">SATUAN PELAYANAN <%= data.nama_uppkb.toUpperCase() %></div>
+                <div style="font-size: 8px;"><%= data.alamat_uppkb %></div>                
+            </td>
+            <!-- <td style="width: 10%;"><img src="<%= qr %>" width="66" height="66" /></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </header>
+    <!-- <table width="100%" style="border-bottom: solid 2px #000000;">
+      <tbody>
+        <tr>
+          <td style="font-weight: bold; padding: 4px;">
+              <div style="font-size: 10px;"><%= data.nama_bptd.toUpperCase() %></div>
+              <div style="font-size: 10px;">SATUAN PELAYANAN <%= data.nama_uppkb.toUpperCase() %></div>
+              <div style="font-size: 9px;"><%= data.alamat_uppkb %></div>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+    <table style="width: 100%; text-align: center;">
+      <tr>
+        <td colspan="3" style="text-align: center; font-weight: bold; padding: 4px;">
+            <div style="font-size: 12pt; font-weight: bold; text-decoration: underline; text-align: center;">BUKTI PELANGGARAN</div>
+        </td>
+      </tr>
+    </table>
+    <table class="table borderless" style="font-size: 11pt; margin-top: 5px;">
+      <tbody>
+        <tr>
+          <td style="width: 20%; padding: 1px;">Tanggal Verifikasi</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;"><%= data.tanggal %></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td style="width: 20%; padding: 1px;">Jam Verifikasi</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;"><%= data.jam %></td>
+        </tr>
+        <tr>
+          <td style="width: 20%; padding: 1px;">No Kendaraan</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;"><%= data.no_kendaraan %></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td style="width: 20%; padding: 1px;">No Uji</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;"><%= data.no_uji %></td>
+        </tr>
+
+        <tr>
+          <td style="width: 20%; padding: 1px;">Pemilik</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;"><%= data.nama_pemilik %></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td style="width: 20%; padding: 1px;">JBI</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;">
+            <% if (Number(data.gandengan_jbki) > 0) { %>
+                <%= data.gandengan_jbki %> Kg
+            <% } else { %>
+              <%= data.jbi %> Kg
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 20%; padding: 1px;">Alamat</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;">
+            <% if (data.alamat_pemilik != 'undefined' && data.alamat_pemilik != '') { %>
+            <%= data.alamat_pemilik %>
+            <% } else { %>
+              <span>-</span>
+            <% } %>
+          </td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td style="width: 20%; padding: 1px;">Berat Timbangan</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;">
+              <% if (data.berat_timbang == 'NaN') { %>
+                0 Kg
+              <% } else { %>
+                <%= data.berat_timbang %> Kg
+              <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 20%; padding: 1px;">Masa Berlaku Uji</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;"><%= data.tgl_masa_berlaku %></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td style="width: 20%; padding: 1px;">Berat Lebih</td>
+          <td>:</td>
+          <td style="width: 40%; padding: 1px;"><%= data.kelebihan_berat %> Kg (<%= data.persen_lebih %> %)</td>
+        </tr>                           
+      </tbody>
+    </table>
+    <table width="100%" style="margin-bottom: 5px; margin-top: 10px;">
+    
+      <tr>
+        <td align="left" width="30%">
+          <div style="text-transform: uppercase; font-size: 14px; font-weight: bold">Photo plat kendaraan
+            :</div>
+        </td>
+        <% for(var i = 0; i < data.plat.length; i++) { %>
+          <td align="left" width="20%">
+            <div style="width: 100%; height: auto;">
+              <img src="<%= data.plat[i].img_url %>" alt="Image" style="width: 100%; height: 50px;">
+            </div>
+          
+          </td>
+        <% } %>
+        <% if (data.plat.length < 2) { %> 
+          <td width="50%"></td>
+        <% } else { %>
+          <td width="30%"></td>
+        <% } %>
+      </tr>
+    
+    </table>
+    <table width="100%">
+    
+      <tr>
+        <% for(var i=0; i < data.capture.length; i++) { %>
+        <% if (data.capture.length > 1) { %>
+        <td align="center" width="50%">
+          <div style="width: 100%; height: 200px;">
+            <img src="<%= data.capture[i].img_url %>" alt="Image" style="width: 100%; height: 200px;">
+          </div>
+    
+        </td>
+        <% } else { %>
+        <td width="10%"></td>
+        <td align="center">
+          <div style="width: 100%; height: 320px;">
+            <img src="<%= data.capture[i].img_url %>" alt="Image" style="width: 100%; height: 320px;">
+          </div>
+    
+        </td>
+        <td width="10%"></td>
+        <% } %>
+        <% } %>
+      </tr>
+    
+    </table>
+    <table width="100%" style="margin-top: -2px">
+    
+      <tr>
+        <% for(var i=0; i < data.capture.length; i++) { %>
+        <% if (data.capture.length > 1) { %>
+        <td align="left">
+          <div style="font-size: 14px; margin-left: 8px">
+            <%= moment(data.capture[i].tgl_capture).format('DD-MM-YYYY') %>
+          </div>
+    
+        </td>
+        <td align="right">
+          <div style="font-size: 14px; margin-right: 8px">
+            <%= moment(data.capture[i].tgl_capture).format('HH:mm:ss') %>
+          </div>
+    
+        </td>
+        <% } else { %>
+        <td width="10%"></td>
+        <td align="left">
+          <div style="font-size: 14px; margin-left: 8px">
+            <%= moment(data.capture[i].tgl_capture).format('DD-MM-YYYY') %>
+          </div>
+    
+        </td>
+        <td align="right">
+          <div style="font-size: 14px; margin-right: 8px">
+            <%= moment(data.capture[i].tgl_capture).format('HH:mm:ss') %>
+          </div>
+    
+        </td>
+        <td width="10%"></td>
+        <% } %>
+        <% } %>
+      </tr>
+    
+    </table>
+    <table width="100%" style="margin-top: 10px;">
+      <tr>
+        <td align="center">
+          <div style="text-transform: uppercase; font-size: 14px; font-weight: bold">Pelanggaran :</div>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div style="font-size: 14px;"><%= data.pelanggaran %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div style="text-transform: uppercase; font-size: 14px; margin-top: 5px; font-weight: bold">
+            Pasal :
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div style="font-size: 14px;"><%= data.pasal %></div>
+        </td>
+      </tr>
+    </table>
+    <table style="width: 100%; margin-top: 10px;">
+      <tbody> 
+        <tr>
+          <td style="width: 100%; font-size: 11pt; font-weight: bold; text-align: center; vertical-align: top; line-height: 0.5;">
+            <div style="line-height: 1;">
+              <p style="margin-top: -2px; line-height: 0.5;">WASATPEL</p>
+              <img src="<%= data.ttd %>" alt="Image" style="width: 256px; height: auto; line-height: 0.5; margin-top: -15px;">
+              <div style="margin: 0px; text-decoration: underline; text-transform: uppercase;">
+                <% if (data.korsatpel !='' ) { %>
+                  ( <%= data.korsatpel %> )
+                    <% } else { %>
+                      ( ____________________ )
+                      <% } %>
+              </div>
+              <div style="margin-top: 0px;">
+                <% if (data.nipkorsatpel !='' ) { %>
+                  &nbsp;NIP. <%= data.nipkorsatpel %>
+                    <% } %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

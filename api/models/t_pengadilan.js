@@ -1,0 +1,144 @@
+/* jshint indent: 2 */
+const sequelizePaginate = require('sequelize-paginate')
+
+module.exports = function (sequelize, DataTypes) {
+    const pengadilan = sequelize.define('t_pengadilan', {
+        'id': {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            comment: "null",
+            primaryKey: true,
+            autoIncrement: true
+        },
+        'lokasi_id': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null",
+            references: {
+                model: 't_lokasi',
+                key: 'id'
+            }
+        }, 
+        'kota_kab_id': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null",
+        },               
+        'kode_uppkb': {
+            type: DataTypes.STRING(30),
+            allowNull: true,
+            comment: "null",
+            unique: true
+        }, 
+        'kode': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null",
+            unique: true
+        },              
+        'nama': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'alamat': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'no_telp': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'etilang_id': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },                     
+        'lat_pos': {
+            type: DataTypes.STRING(30),
+            allowNull: true,
+            comment: "null"
+        },
+        'lon_pos': {
+            type: DataTypes.STRING(30),
+            allowNull: true,
+            comment: "null"
+        },
+        'sync_to_pusat': {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+            comment: "null"
+        },
+        'sync_from_pusat': {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+            comment: "null"
+        },                                        
+        'created_at': {
+            type: DataTypes.DATE,
+            allowNull: false,
+            //defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+            comment: "null"
+        },
+        'updated_at': {
+            type: DataTypes.DATE,
+            allowNull: false,
+            //defaultValue: sequelize.literal('NOW() ON UPDATE NOW()'),
+            comment: "null"
+        },
+        'deleted_at': {
+            type: DataTypes.DATE,
+            allowNull: true,
+            //defaultValue: sequelize.literal('NOW() ON UPDATE NOW()'),
+            comment: "null"
+        },               
+        'created_by': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'updated_by': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'deleted_by': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },        
+        'is_active': {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: true,
+            comment: "null"
+        },        
+        'is_deleted': {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+            comment: "null"
+        }
+    }, {
+        tableName: 'jt_pengadilan'
+    });
+
+    pengadilan.associate = function (models) {
+        pengadilan.belongsTo(models.t_lokasi, {
+            foreignKey: 'lokasi_id',
+            as: 'pengadilanlokasiuppkb'
+        });
+        pengadilan.hasMany(models.t_penindakan, {
+            foreignKey: 'pengadilan_id',
+            as: 'penindakanPengadilan'
+        }); 
+    }
+
+    sequelizePaginate.paginate(pengadilan)
+
+    return pengadilan;
+};

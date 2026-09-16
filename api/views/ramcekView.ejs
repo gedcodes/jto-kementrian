@@ -1,0 +1,1293 @@
+<%- include ('default/header.ejs') %>
+
+  <div style="font-family: Arial; font-size: 9px; margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+
+    <!-- SECTION UPPKB / TANGGAL -->
+    <section>
+      <table width="100%"
+        style="width: 100%; padding: 0px; margin-top: 4px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold; width: 10%; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 9px; ">UPPKB</div>
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 9px;">: <%= data.detailramcek_uppkb.nama.toUpperCase() %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 9px; ">TANGGAL</div>
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <div style="font-size: 9px;">: <%= moment(data.tgl_pemeriksaan).format('DD-MM-YYYY') %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION JUDUL FORMULIR -->
+    <section>
+      <table width="100%"
+        style="width: 100%; padding: 0px; margin-top: 4px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; text-align: center; background-color: rgb(230, 230, 230);">
+              <div style="font-size: 10pt; ">
+                <b>
+                  FORMULIR PEMERIKSAAN TEKNIS KENDARAAN ANGKUTAN BARANG
+                </b>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION DATA PEMERIKSAAN -->
+    <section>
+      <table style='margin-top: 4px; width: 100%; border-collapse: collapse; font-size: 9px;' border="1">
+        <tr>
+          <td colspan='8' style='font-size: 9px;'><b>DATA PEMERIKSAAN</b></td>
+        </tr>
+        <tr>
+          <td>1.</td>
+          <td>Hari/Tanggal</td>
+          <td style='text-align: center;'>:</td>
+          <td>
+            <%= moment(data.tgl_pemeriksaan).locale("id").format('dddd / DD-MM-YYYY') %>
+          </td>
+          <td>6.</td>
+          <td>Nama Perusahaan</td>
+          <td style='text-align: center;'>:</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td>Lokasi</td>
+          <td style='text-align: center;'>:</td>
+          <td style='text-align: left;'>
+            <% if(data.detailramcek_uppkb) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">UPPKB</span>
+              &nbsp;
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Lainnya</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">UPPKB</span>
+              &nbsp;
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Lainnya</span>
+            <% } %> 
+          </td>
+          <td>7.</td>
+          <td>Nomor Kendaraan</td>
+          <td style='text-align: center;'>:</td>
+          <td style='text-align: left; font-weight: bold;'>
+            <span style="vertical-align: middle; margin-left: 2px;"><%= data.no_kendaraan %></span>
+            <span style='margin-left: 2px;'>
+              <% if(data.no_kend_value == 1) { %> 
+                <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+                <span style="vertical-align: middle; margin-left: 2px;">Reguler</span>
+                &nbsp;
+                <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+                <span style="vertical-align: middle; margin-left: 2px;">Cadangan</span>
+              <% } else { %>
+                <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+                <span style="vertical-align: middle; margin-left: 2px;">Reguler</span>
+                &nbsp;
+                <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+                <span style="vertical-align: middle; margin-left: 2px;">Cadangan</span>
+              <% } %>               
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td>Nama Lokasi</td>
+          <td style='text-align: center;'>:</td>
+          <td style='font-size: 8px; font-weight: bold;'>
+            <% if (data.detailramcek_uppkb) { %>
+            <%= data.detailramcek_uppkb.nama.toUpperCase() %>
+            <% } %>
+          </td>
+          <td>8.</td>
+          <td>Nomor STUK</td>
+          <td style='text-align: center;'>:</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4.</td>
+          <td>Nama Pengemudi</td>
+          <td style='text-align: center;'>:</td>
+          <td>
+            <%= data.nama_pengemudi %>
+          </td>
+          <td rowspan='2'>9.</td>
+          <td rowspan='2'>Jenis Mobil Barang</td>
+          <td rowspan='2' style='text-align: center;'>:</td>
+          <td rowspan='2' style='text-align: left;'>
+            <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+            <span style="vertical-align: middle; margin-left: 2px;">Bak Muatan Terbuka/Tertutup</span>
+            <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+            <span style="vertical-align: middle; margin-left: 2px;">Mobil Tangki</span>
+            <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+            <span style="vertical-align: middle; margin-left: 2px;">Mobil Penarik</span>
+          </td>
+        </tr>
+        <tr>
+          <td>5.</td>
+          <td>Umur</td>
+          <td style='text-align: center;'>:</td>
+          <td></td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECTION UNSUR ADMINISTRASI -->
+    <section>
+      <table style='margin-top: 4px;  width: 100%; border-collapse: collapse; font-size: 9px;' border="1">
+        <tr>
+          <td colspan='2' rowspan='2' style='font-size: 9px;'><b>I. UNSUR ADMINISTRASI</b></td>
+          <td colspan='2' style='text-align: center; font-size: 9px;'><b>HASIL / SANKSI</b></td>
+        </tr>
+        <tr>
+          <td style='background-color: rgb(230, 230, 230); text-align: center; font-size: 9px;'>
+            <b>DIIJINKAN OPERASIONAL</b>
+          </td>
+          <td style='background-color: rgb(201, 197, 197); text-align: center; font-size: 9px;'>
+            <b>TILANG & DILARANG OPERASIONAL</b>
+          </td>
+        </tr>
+        <tr>
+          <td>1.</td>
+          <td>Kartu Izin Muatan</td>
+          <td>
+            <% if (data.kartu_izin_value == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada, Berlaku</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada, Berlaku</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.kartu_izin_berlaku == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Berlaku</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Berlaku</span>
+            <% } %>
+
+            <% if (data.kartu_izin_value == 0) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Ada</span>
+            <% } %>
+
+            <% if (data.kartu_izin_sesuai == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Sesuai Fisik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Sesuai Fisik</span>
+            <% } %>            
+          </td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td>Kartu Uji/STUK</td>
+          <td>
+            <% if (data.kartu_uji_value == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada, Berlaku</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada, Berlaku</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.kartu_uji_tidak_berlaku == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Berlaku</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Berlaku</span>
+            <% } %>
+
+            <% if (data.kartu_uji_value == 0) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Ada</span>
+            <% } %>
+
+            <% if (data.kartu_uji_tidak_sesuai == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Sesuai Fisik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tdk Sesuai Fisik</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td>SIM Pengemudi</td>
+          <td>
+            <% if (data.sim_a == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">A Umum</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">A Umum</span>
+            <% } %>
+
+            <% if (data.sim_b1 == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">B1 Umum</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">B1 Umum</span>
+            <% } %>
+
+            <% if (data.sim_b2 == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">B2 Umum</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">B2 Umum</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.sim_tidak_sesuai == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">SIM Tidak Sesuai</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">SIM Tidak Sesuai</span>
+            <% } %>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECTION UNSUR TEKNIS UTAMA -->
+    <section>
+      <table style='margin-top: 4px; width: 100%; border-collapse: collapse; font-size: 9px;' border="1">
+        <tr>
+          <td colspan='3' rowspan='2' style='font-size: 9px;'><b>II. UNSUR TEKNIS UTAMA</b></td>
+          <td colspan='3' style='text-align: center; font-size: 9px;'><b>HASIL / SANKSI</b></td>
+        </tr>
+        <tr>
+          <td style='text-align: center; background-color: rgb(230, 230, 230); font-size: 9px;'><b>DIIJINKAN
+              OPERASIONAL</b></td>
+          <td colspan='2' style='text-align: center; background-color: rgb(201, 197, 197); font-size: 9px;'>
+            <b>TILANG & DILARANG OPERASIONAL</b></td>
+        </tr>
+        <tr>
+          <td>A.</td>
+          <td colspan='5'>SISTEM PENERANGAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>1.</td>
+          <td>Lampu Utama Kendaraan</td>
+          <td colspan='3'></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>a. Dekat</td>
+          <td>
+            <% if (data.lampu_utama_kendaraan_dekat == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_utama_kendaraan_dekat_kanan == 1 || data.lampu_utama_kendaraan_dekat_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_utama_kendaraan_dekat_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_utama_kendaraan_dekat_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>b. Jauh</td>
+          <td>
+            <% if (data.lampu_utama_kendaraan_jauh == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_utama_kendaraan_jauh_kanan == 1 || data.lampu_utama_kendaraan_jauh_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_utama_kendaraan_jauh_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_utama_kendaraan_jauh_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>2.</td>
+          <td>Lampu Penunjuk Arah (Sein)</td>
+          <td colspan='3'></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>a. Depan</td>
+          <td>
+            <% if (data.lampu_petunjuk_arah_depan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_petunjuk_arah_depan_kanan == 1 || data.lampu_petunjuk_arah_depan_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_petunjuk_arah_depan_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_petunjuk_arah_depan_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>b. Belakang</td>
+          <td>
+            <% if (data.lampu_petunjuk_arah_belakang == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_petunjuk_arah_belakang_kanan == 1 || data.lampu_petunjuk_arah_belakang_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_petunjuk_arah_belakang_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_petunjuk_arah_belakang_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>3.</td>
+          <td>Lampu Rem</td>
+          <td>
+            <% if (data.lampu_rem == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_rem_kanan == 1 || data.lampu_rem_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_rem_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_rem_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>4.</td>
+          <td>Lampu Mundur</td>
+          <td>
+            <% if (data.lampu_mundur == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_mundur_kanan == 1 || data.lampu_mundur_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_mundur_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_mundur_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>B.</td>
+          <td colspan='5'>SISTEM PENGEREMAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>5.</td>
+          <td>Kondisi Rem Utama</td>
+          <td>
+            <% if (data.kondisi_rem_utama == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Berfungsi</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.kondisi_rem_utama != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>6.</td>
+          <td>Kondisi Rem Parkir</td>
+          <td>
+            <% if (data.kondisi_rem_parkir == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Berfungsi</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.kondisi_rem_parkir != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>C.</td>
+          <td colspan='5'>BADAN KENDARAAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>7.</td>
+          <td>Kondisi Kaca Depan</td>
+          <td>
+            <% if (data.kondisi_kaca_depan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Baik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Baik</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.kondisi_kaca_depan != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Buruk</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Buruk</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>D.</td>
+          <td colspan='5'>BAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>8.</td>
+          <td>a. Kondisi Ban Depan</td>
+          <td>
+            <% if (data.kondisi_ban_depan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Laik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Laik</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.kondisi_ban_depan_kanan == 1 || data.kondisi_ban_depan_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Laik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak laik</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.kondisi_ban_depan_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.kondisi_ban_depan_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>b. Kondisi Ban Belakang</td>
+          <td>
+            <% if (data.kondisi_ban_belakang == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Laik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Laik</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.kondisi_ban_belakang_kanan == 1 || data.kondisi_ban_belakang_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Laik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak laik</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.kondisi_ban_belakang_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.kondisi_ban_belakang_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>E.</td>
+          <td colspan='5'>PERLENGKAPAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>9.</td>
+          <td>Sabuk Keselamatan Pengemudi</td>
+          <td>
+            <% if (data.sabuk_keselamatan_pengemudi == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada dan Fungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada dan Fungsi</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.sabuk_keselamatan_pengemudi != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Fungsi/Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Fungsi/Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>10.</td>
+          <td>Plakat dan Simbol</td>
+          <td>
+            <% if (data.plakat_dan_simbol == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Sesuai</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Sesuai</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.plakat_dan_simbol != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Sesuai</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Sesuai</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>F.</td>
+          <td colspan='5'>DIMENSI MUATAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>11.</td>
+          <td>Dimensi Muatan</td>
+          <td>
+            <% if (data.dimensi_muatan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Sesuai</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Sesuai</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.dimensi_muatan != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Sesuai</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Sesuai</span>
+            <% } %>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- UNSUR TEKNIS PENUNJANG -->
+    <section>
+      <table style='margin-top: 4px; width: 100%; border-collapse: collapse; font-size: 9px;' border="1">
+        <tr>
+          <td colspan='3' rowspan='2' style='font-size: 9px;'><b>III. UNSUR TEKNIS PENUNJANG</b></td>
+          <td colspan='3' style='text-align: center; font-size: 9px;'><b>HASIL / SANKSI</b></td>
+        </tr>
+        <tr>
+          <td style='text-align: center; background-color: rgb(230, 230, 230); font-size: 9px;'><b>DIIJINKAN OPERASIONAL</b>
+          </td>
+          <td colspan='2' style='text-align: center; background-color: rgb(201, 197, 197); font-size: 9px;'><b>TILANG & DILARANG
+              OPERASIONAL</b></td>
+        </tr>
+        <tr>
+          <td>A.</td>
+          <td colspan='5'>PENGUKURAN KECEPATAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>12.</td>
+          <td>Pengukur Kecepatan</td>
+          <td>
+            <% if (data.pengukuran_kecepatan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Berfungsi</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.pengukuran_kecepatan != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>B.</td>
+          <td colspan='5'>SISTEM PENGEREMAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>13.</td>
+          <td>Lampu Posisi</td>
+          <td colspan='3'></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>a. Depan</td>
+          <td>
+            <% if (data.lampu_depan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_depan_kanan == 1 || data.lampu_depan_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_depan_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_depan_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>b. Belakang</td>
+          <td>
+            <% if (data.lampu_belakang == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Semua Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_belakang_kanan == 1 || data.lampu_belakang_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Menyala</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.lampu_belakang_kanan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kanan</span>
+            <% } %>
+
+            <% if (data.lampu_belakang_kiri == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Kiri</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>C.</td>
+          <td colspan='5'>BADAN KENDARAAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>14.</td>
+          <td>Kaca Spion</td>
+          <td>
+            <% if (data.kaca_spion == 1 && data.kaca_spion_tidak_sesuai != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada dan Sesuai</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada dan Sesuai</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.kaca_spion != 1 && data.kaca_spion_tidak_sesuai == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Sesuai</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Sesuai</span>
+            <% } %>
+
+            <% if (data.kaca_spion != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>15.</td>
+          <td>Penghapus Kaca (Wiper)</td>
+          <td>
+            <% if (data.penghapus_kaca == 1 && data.penghapus_kaca_tidak_sesuai !== 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.penghapus_kaca_tidak_sesuai == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } %>
+
+            <% if (data.penghapus_kaca != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>16.</td>
+          <td>Klakson</td>
+          <td>
+            <% if (data.klakson == 1 && data.klakson_tidak_sesuai !== 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.klakson_tidak_sesuai == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } %>
+
+            <% if (data.klakson != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td>D.</td>
+          <td colspan='5'>PERLENGKAPAN KENDARAAN</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>17.</td>
+          <td>Sabuk Keselamatan</td>
+          <td>
+            <% if (data.sabuk_keselamatan_pengemudi_teknis_penunjang == 1 && data.sabuk_keselamatan_pengemudi_teknis_penunjang_tidak_laik !== 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada dan Laik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada dan Laik</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.sabuk_keselamatan_pengemudi_teknis_penunjang_tidak_laik == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Laik</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Laik</span>
+            <% } %>
+
+            <% if (data.sabuk_keselamatan_pengemudi_teknis_penunjang != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>18.</td>
+          <td>Segitiga Keselamatan</td>
+          <td>
+            <% if (data.segitiga_pengaman == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.segitiga_pengaman != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>19.</td>
+          <td>Dongkrak</td>
+          <td>
+            <% if (data.dongkrak == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.dongkrak != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>20.</td>
+          <td>Pembuka Roda</td>
+          <td>
+            <% if (data.pembuka_roda == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.pembuka_roda != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>21.</td>
+          <td>Lampu Senter</td>
+          <td>
+            <% if (data.lampu_senter == 1 && data.lampu_senter_tidak_berfungsi != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Ada</span>
+            <% } %>
+          </td>
+          <td colspan='2'>
+            <% if (data.lampu_senter_tidak_berfungsi == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Berfungsi</span>
+            <% } %>
+
+            <% if (data.lampu_senter != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">Tidak Ada</span>
+            <% } %>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- KESIMPULAN -->
+    <section>
+      <table 
+        width="100%"
+        style="margin-top: 4px; width: 100%; padding: 0px; margin-top: 4px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959; font-size: 9px;"
+      >
+        <tbody>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+              <div style="font-size: 9px; ">
+                KESIMPULAN
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size: 9px; margin: 4px 0;">
+            BERDASARKAN HASIL DI ATAS, MAKA KENDARAAN TERSEBUT DINYATAKAN :
+      </div>
+    </section>
+
+    <!-- SECTION KEPUTUSAN LAIK JALAN -->
+    <section>
+      <table style='margin-top: 4px; width: 100%; border-collapse: collapse; font-size: 9px;' border="1">
+        <tr>
+          <td style='text-align: center; width: 30%; background-color: rgb(230, 230, 230);'>
+            <% if (data.status_kesimpulan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">LAIK JALAN</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">LAIK JALAN</span>
+            <% } %>
+          </td>
+          <td style='text-align: center; width: 30%; background-color: rgb(201, 197, 197);'>
+            <% if (data.status_kesimpulan != 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">TIDAK LAIK JALAN</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">TIDAK LAIK JALAN</span>
+            <% } %>
+          </td>
+          <td style='text-align: center;'>
+            <b>CATATAN</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <% if (data.diijinkan_operasional == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">DIIJINKAN OPERASIONAL</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">DIIJINKAN OPERASIONAL</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.tilang_dan_dilarang_operasional == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">TILANG DAN DILARANG OPERASIONAL</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">TILANG DAN DILARANG OPERASIONAL</span>
+            <% } %>
+          </td>
+          <td rowspan='2'>
+            <%= data.catatan || '' %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <% if (data.peringatan_dan_perbaikan == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">PERINGATAN/PERBAIKAN</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">PERINGATAN/PERBAIKAN</span>
+            <% } %>
+          </td>
+          <td>
+            <% if (data.dilarang_operasional == 1) { %> 
+              <img src="<%= checked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">DILARANG OPERASIONAL</span>
+            <% } else { %>
+              <img src="<%= unchecked %>" width="12" height="12" style="vertical-align: middle; margin-left: 2px;" />
+              <span style="vertical-align: middle; margin-left: 2px;">DILARANG OPERASIONAL</span>
+            <% } %>
+          </td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- SECTION FOOTER -->
+    <section>
+      <table style='margin-top: 4px; width: 100%; border-collapse: collapse; border: solid 1px #595959; font-size: 8px;'>
+        <tr>
+          <td style='width: 20%; border-width: 1px 1px 0px 1px;'>Catatan</td>
+          <td style='width: 20%; padding-left: 6px; text-align: left; width: 23%; border-width: 1px 1px 0px 1px;'>PENGEMUDI</td>
+          <td style='width: 30%; text-align: left; border-width: 1px 1px 0px 1px;'>PENGUJI KENDARAAN BERMOTOR</td>
+          <td style='width: 30%; text-align: left; border-width: 1px 1px 0px 1px;'>PENYIDIK PEGAWAI NEGERI SIPIL</td>
+        </tr>
+        <tr>
+          <td rowspan='3' style='border-width: 0px 1px 1px 1px;'>
+            <i>
+              Jika setiap unsur terdapat pelanggaran, maka sanksi yang dikenakan
+              adalah sanksi yang paling berat
+            </i>
+          </td>
+          <td rowspan='3' style='border-width: 0px 1px 1px 1px; padding-left: 6px;'>
+            <div>
+              <p style="padding-top: 8px; padding-bottom: 8px;">&nbsp;</p>
+              <div>Nama : <%= data.nama_pengemudi || '' %></div>
+            </div>
+          </td>
+          <td rowspan='3' style='border-width: 0px 1px 1px 1px;'>
+            <div>
+              <p style="padding-top: 8px; padding-bottom: 8px;">&nbsp;</p>
+              <div>Nama : <%= data.nama_penguji || '' %></div>
+            </div>
+          </td>
+          <td rowspan='3' style='border-width: 0px 1px 1px 1px;'>
+            <div>
+              <p style="padding-top: 8px; padding-bottom: 8px;">&nbsp;</p>
+              <div>Nama : <%= data.nama_ppns || '' %></div>
+            </div> 
+          </td>
+        </tr>
+      </table>
+    </section>
+
+
+  <%- include ('default/footer.ejs') %>

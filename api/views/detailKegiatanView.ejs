@@ -1,0 +1,157 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td colspan="3" style="padding: 4px; width: 100%; text-align: center; vertical-align: bottom;">
+              <div style="font-weight: bold; font-size: 12pt; text-decoration: underline;"><%= data.judul.toUpperCase() %>
+              </div>
+              <div style="font-weight: 600; font-size: 10pt; ">
+                <%= data.kode %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; width: 15%; padding: 4px; vertical-align: bottom;">
+              
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+              
+            </td>
+            <td rowspan="4" style="text-align: right;">
+              <img src="<%= qr %>" width="70" height="70" />
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; width: 15%; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">SATUAN KERJA</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: 
+                <%= data.kementerian.toUpperCase() %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; width: 15%; padding: 4px; vertical-align: top;">
+              <div style="font-size: 10px; ">BPTD</div>
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: top;">
+              <div style="font-size: 10px;">:
+                <%= data.bptd.toUpperCase() %>
+              </div>
+            </td>
+          </tr> 
+          <tr>
+            <td style="font-weight: bold; width: 15%; padding: 4px; vertical-align: bottom;">
+          
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+          
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <table width="100%" style="width: 100%; font-size: 9px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              NO
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              LOKASI UPPKB
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              KATEGORI
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              KODE BMN
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              NAMA ASET
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              SATUAN
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              JENIS
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              SPESIFIKASI
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              KONDISI
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              SUB KONDISI
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              VENDOR
+            </td>
+            <td
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              METODE
+            </td>
+          </tr>                               
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < data.aset.length; i++) { %>
+          <tr>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= i+1 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data.aset[i].uppkb_aset.nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].kategori_aset.nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].kode_bmn %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].satuan_aset.nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].jenis_aset.nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].spesifikasi %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].kondisi_aset.nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.aset[i].sub_kondisi_aset.nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.vendor %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data.metode %>
+            </td>       
+          </tr>
+          <% } %>
+        </tbody>
+      </table>      
+    </section>
+  </div>
+
+<%- include ('default/footer.ejs') %>

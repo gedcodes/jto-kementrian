@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Print Hasil Penimbangan</title>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        @media print {
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                width: 21cm;
+                height: 21.5cm;
+                display: block;
+                font-family: "Calibri";
+            }
+
+            @page {
+                size: 21cm 21.5cm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <header>
+            <table width="100%" style="border-bottom: solid 1px #000000;">
+                <tbody>
+                    <tr>
+                        <td style="width: 10%;">
+                            LOGO KIRI
+                        </td>
+                        <td style="width: 80%; font-weight: bold;">
+                            <div style="font-size: 12px;">KEMENTERIAN PERHUBUNGAN</div>
+                            <div style="font-size: 12px;">DIREKTORAT JENDERAL PERHUBUNGAN DARAT</div>
+                            <div style="font-size: 12px;">BPTD WIL. IX PROV JAWA BARAT</div>
+                            <div style="font-size: 9px;">SATUAN PELAYANAN UPPKB BALONGGANDU</div>
+                            <div style="font-size: 8px;">KABUPATEN KARAWANG</div>
+                        </td>
+                        <td style="width: 10%;">LOGO KANAN</td>
+                    </tr>
+                </tbody>
+            </table>
+        </header>
+    </div>
+
+</body>
+
+</html>

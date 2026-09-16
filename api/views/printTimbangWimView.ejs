@@ -1,0 +1,217 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+
+    <!-- SECTION JUDUL -->
+    <section>
+      <table width="100%"
+        style="width: 100%; padding: 0px; margin: 4px 0; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; width: 100%; text-align: center;">
+              <div style="font-weight: bold; font-size: 12pt; ">LAPORAN DATA WIM <%= namauppkb.toUpperCase() %>
+              </div>
+              <div style="font-weight: bold; font-size: 12pt; ">
+                TANGGAL <%= tanggal %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION TABEL -->
+    <section>
+      <table width="100%"
+        style="width: 100%; font-size: 7px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No
+            </th>
+            <th
+              style="padding: 4px; width: 8%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <span>Waktu</span>
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Lokasi
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No Kendaraan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Sumbu
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Berat Deteksi
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Berat Diizinkan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kelebihan Berat
+            </th>                        
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Panjang Deteksi
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Panjang Diizinkan
+            </th>   
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kelebihan Panjang
+            </th>                     
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Lebar Deteksi
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Lebar Diizinkan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kelebihan Lebar
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tinggi Deteksi
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tinggi Diizinkan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kelebihan Tinggi
+            </th>                        
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kecepatan WIM
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Status Melanggar
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Status Blu-e
+            </th>            
+          </tr>
+        </thead>
+        <tbody>
+          <% var status='' ; %>
+          <% var status_melanggar='Tidak Melanggar' ; %>
+
+            <% for (var i=0; i < data.length; i++) { %>
+
+              <% if (data[i].is_status==1) { status='Data Baru' ; } else if (data[i].is_status==2) {
+                status='Ada Di Blue' ; } else { status='Tidak Ada Di Blue' ; } %>
+              
+              <% 
+                if (data[i].is_melanggar == true) {
+                  status_melanggar = 'Melanggar'
+                }
+              %>
+
+                <tr>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+                    <%= i+1 %>
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= moment(data[i].tgl_penimbangan).format('DD-MM-YYYY HH:mm:ss') %>
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].wim_uppkb.nama %>]
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].no_kendaraan %>
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].sumbu %> <br /> Jumlah Sumbu: (<%= data[i].jml_sumbu %>)
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].wim_berat || 0 %> Kg
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= Number(data[i].batas_berat_kg) || 0 %> Kg
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= Number(data[i].jml_kelebihan_berat) || 0 %> Kg (<%= data[i].persen_kelebihan_berat %>%)
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].wim_panjang || 0 %> mm
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].batas_panjang_mm || 0 %> mm
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].jml_kelebihan_panjang || 0 %> mm (<%= data[i].persen_kelebihan_panjang %>%)
+                  </td>                                    
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].wim_lebar || 0 %> mm
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].batas_lebar_mm || 0 %> mm
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].jml_kelebihan_lebar || 0 %> mm (<%= data[i].persen_kelebihan_lebar %>%)
+                  </td>                                    
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].wim_tinggi || 0 %> mm
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].batas_tinggi_mm || 0 %> mm
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].jml_kelebihan_tinggi || 0 %> mm (<%= data[i].persen_kelebihan_tinggi %>%)
+                  </td>                                    
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= data[i].wim_kecepatan || 0 %> Km/Jam
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= status_melanggar %>
+                  </td>
+                  <td
+                    style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                    <%= status %>
+                </td>
+                </tr>
+                <% } %>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <%- include ('default/footer.ejs') %>

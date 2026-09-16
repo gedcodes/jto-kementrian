@@ -1,0 +1,26 @@
+const publicRoutes = {
+    //'POST /register': 'AuthController.register',
+    'POST /login': 'AuthController.login',
+    'POST /login-web': 'AuthController.loginWeb',
+    'POST /user/token': 'UsersController.tokenRefresh',
+    'POST /forgot-password': 'UsersController.forgotPassword',
+    'POST /reset-password': 'UsersController.forgotResetPassword',
+    'POST /ping': 'PingController.findAll',
+    'POST /wimpenimbangan/createwimsync': 'PenimbanganWimController.createSyncWimData',
+    'POST /jalurpenimbangan/jalur': 'PenimbanganWimController.automaticLane',
+    'GET /appversi': 'AppVersiController.findAllActivePublic',
+    //'POST /token': 'AuthController.tokenRefresh',
+    'GET /uppkb': 'LokasiController.findAllActive',
+    'GET /uppkb/ppns': 'PetugasController.findPpnsActive',
+    'GET /jto/kendaraan/ujiberkala': 'KendaraanController.findUjiberkala',
+    'POST /jto/kendaraan/rfid': 'KendaraanController.findRfid',
+    'GET /jto/kendaraan/qrcode': 'KendaraanController.findQrcode',
+    'GET /qr/rep/penimbangan': 'QrViewerController.pengawasanPenimbangan',
+    'GET /qr/rep/pelanggaran': 'QrViewerController.pengawasanPelanggaran',
+    'GET /qr/rep/penindakan': 'QrViewerController.pengawasanPenindakan',
+    'GET /timbangan/local/active': 'TimbanganController.findAllActive',
+    'GET /cpt': 'AuthController.getCaptcha',
+    'GET /wiminfo': 'WimController.wimInfo',
+};
+
+module.exports = publicRoutes;

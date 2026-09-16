@@ -1,0 +1,163 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+
+    <!-- SECTION JUDUL -->
+    <section>
+      <table width="100%"
+        style="width: 100%; padding: 0px; margin: 4px 0; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; width: 100%; text-align: center;">
+              <div style="font-weight: bold; font-size: 12pt; ">LAPORAN DATA TOP 10 PELANGGARAN BERDASARKAN <%= type %>
+              </div>
+              <% if (lokasi) { %>
+                <div style="font-weight: bold; font-size: 12pt; ">
+                  <%= lokasi.toUpperCase() %>
+                </div>
+                <% } %>
+              <% if (tanggal) { %>
+              <div style="font-weight: bold; font-size: 12pt; ">
+                <%= interval === 'harian' ? 'TANGGAL' : interval === 'bulanan' ? 'BULAN' : 'TAHUN' %> <%= tanggal %>
+              </div>
+              <% } %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION TABEL -->
+    <section>
+      <table width="100%"
+        style="width: 100%; font-size: 7px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No
+            </th>
+            <th
+              style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Waktu
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              BPTD
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Lokasi UPPKB
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No Kendaraan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No Uji
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Jenis Kendaraan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Pemilik Kendaraan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Alamat Pemilik Kendaraan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kategori Komoditi
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Komoditi
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Asal - Tujuan
+            </th>
+            <th
+              style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Pelanggaran
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (data && data.length > 0) { %>
+            <% data.forEach(function(item, index) { %>
+              <tr>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                  <%= index + 1 %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                  <%= item.waktu || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.bptd || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.uppkb || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                  <%= item.no_kendaraan || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                  <%= item.no_uji || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.jenis_kendaraan || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.nama_pemilik || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.alamat_pemilik || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.kategori_komoditi || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.komoditi || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.asal_tujuan || '-' %>
+                </td>
+                <td
+                  style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+                  <%= item.pelanggaran || '-' %>
+                </td>
+              </tr>
+            <% }); %>
+          <% } else { %>
+            <tr>
+              <td colspan="10"
+                style="padding: 8px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+                Tidak ada data
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+<%- include ('default/footer.ejs') %>

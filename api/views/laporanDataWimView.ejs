@@ -1,0 +1,170 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+
+    <!-- SECTION JUDUL -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin: 4px 0; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; width: 100%; text-align: center;">
+              <div style="font-weight: bold; font-size: 12pt; ">REKAPITULASI DATA WIM <%= resumedata.intervalString %></div>  
+              <div style="font-weight: bold; font-size: 12pt; ">
+                <% if (resumedata.interval == 'tahun') { %>
+                  <div><%= namauppkb.toUpperCase() %></div> 
+                  <div>TAHUN <%= tahun %></div>
+                <% } else if (resumedata.interval == 'bulan') { %>
+                  <div><%= namauppkb.toUpperCase() %></div> 
+                  <div>BULAN <%= blnText.toUpperCase() %> TAHUN <%= tahun %></div>
+                <% } else { %>
+                  <div><%= namauppkb.toUpperCase() %></div> 
+                  <div><%= tglText %></div>
+                <% } %>
+              </div>  
+            </td>
+          </tr>                               
+        </tbody>
+      </table>      
+    </section>
+
+    <!-- SECTION TABEL -->
+    <section>
+      <table width="100%" style="width: 100%; font-size: 8pt; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <th style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No 
+            </th>
+            <th style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <span>Waktu</span>
+              <br />
+              <% if (resumedata.interval == 'tahun') { %>
+                <span>(Bulan)</span>
+              <% } else  { %>
+                <span>(Tanggal)</span>
+              <% } %>
+            </th>
+            <th style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Jumlah Data WIM
+            </th>
+            <th style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              BLUE Tersedia
+            </th>
+            <th style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              BLUE Tidak Tersedia
+            </th>
+            <th style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Masuk UPPKB
+            </th>
+            <th style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tidak Masuk UPPKB
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var total_wim = 0; %>
+          <% var total_blue_tersedia = 0; %>
+          <% var total_blue_tidak_tersedia = 0; %>
+          <% var total_masuk_uppkb = 0; %>
+          <% var total_tidak_masuk_uppkb = 0; %>
+
+          <% for (var i = 0; i < data.length; i++) { %>
+
+          <% total_wim = Number(total_wim) + Number(data[i].jml_wim || 0) %>
+          <% total_blue_tersedia = Number(total_blue_tersedia) + Number(data[i].jml_blue_tersedia || 0) %>
+          <% total_blue_tidak_tersedia = Number(total_blue_tidak_tersedia) + Number(data[i].jml_blue_tidak_tersedia || 0) %>
+          <% total_masuk_uppkb = Number(total_masuk_uppkb) + Number(data[i].jml_masuk_uppkb || 0) %>
+          <% total_tidak_masuk_uppkb = Number(total_tidak_masuk_uppkb) + Number(data[i].jml_tidak_masuk_uppkb || 0) %>
+
+          <tr>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= i+1 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <% if (resumedata.interval == 'tahun') { %>
+                <%= data[i].waktu %>
+              <% } else  { %>
+                <%= moment(data[i].waktu).format('DD-MM-YYYY') %>
+              <% } %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_wim || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_blue_tersedia || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_blue_tidak_tersedia || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_masuk_uppkb || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_tidak_masuk_uppkb || 0 %>
+            </td>
+          </tr>
+          <% } %>
+          <tr style="font-weight: bold; background-color: lightgray;">
+            <td rowspan="1" colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              TOTAL
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= total_wim %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= total_blue_tersedia %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= total_blue_tidak_tersedia %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= total_masuk_uppkb %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= total_tidak_masuk_uppkb %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION FOOTER -->
+    <section>
+      <table width="100%" style="width: 100%; font-size: 9pt; padding: 0px; margin-top: 2px; border-spacing: 0px;">
+        <tbody>
+          <td colspan="2" style="width: 50%; padding: 4px; border-spacing: 0px; text-align: left; vertical-align: top; font-size: 12px;">
+            &nbsp;            
+          </td>
+          <td style="width: 15%; padding: 4px; border-spacing: 0px; text-align: center;">
+            &nbsp;
+          </td>
+          <td style="width: 35%; padding: 4px; border-spacing: 0px; text-align: center;">
+            <div style="border: dotted 1px #cccccc; margin-top: 2px;">
+              <div><%= namauppkb.toUpperCase() %>, <%= moment().format('DD - MM - YYYY') %></div>
+              <div><b>KORSATPEL</b></div>
+              <div style="height: 48px;">&nbsp;</div>
+              <% if (korsatpel != '') { %>
+              <div>
+                <b>( <%= korsatpel.nama.toUpperCase() %> )</b>
+              </div>
+              <div><%= korsatpel.pangkat %></div>
+              <div>NIP. <%= korsatpel.nip %></div>
+              <% } else { %>
+              <div>
+                <b>( ................................... )</b>
+              </div>  
+              <div>Pangkat / Golongan</div>
+              <div>NIP. ...................................</div>
+              <% } %>
+            </div>
+          </td>
+          <td style="width: 5%; padding: 4px; border-spacing: 0px; text-align: center;">
+            &nbsp;
+          </td>
+        </tbody>
+      </table>
+    </section>
+  </div>  
+<%- include ('default/footer.ejs') %>

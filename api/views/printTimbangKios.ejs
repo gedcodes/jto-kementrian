@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Print Hasil Penimbangan</title>
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+  <style type="text/css">
+    /* @media print {
+            body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 4px;
+            }
+        } */
+
+    body {
+      width: 11cm;
+      height: 15cm;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      margin-left: 2px;
+      margin-right: 2px;
+      padding: 4px;
+      line-height: 1.2;
+      font-family: Arial, Helvetica, sans-serif;
+      /* border-style: solid; */
+    }
+
+    .col-md-2 {
+      width: 20%;
+    }
+
+    .col-md-4 {
+      width: 40%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div style="width: 100%; height: 100%;">
+    <header>
+      <table width="100%" style="border-bottom: solid 2px #000000; margin-top: 2px;">
+        <tbody>
+          <tr>
+            <!-- <td style="width: 10%;">
+              <img src="<%= logo %>" width="44" height="46" />
+            </td> -->
+            <td style="width: 100%; font-weight: bold; text-align: center;">
+              <div>
+                <img src="<%= logo %>" width="55" height="60" />
+              </div>
+              <div style="font-size: 11pt;">KEMENTERIAN PERHUBUNGAN</div>
+              <div style="font-size: 11pt;">DIREKTORAT JENDERAL PERHUBUNGAN DARAT</div>
+              <div style="font-size: 11pt;">
+                <%= data.nama_bptd.toUpperCase() %>
+              </div>
+              <div style="font-size: 10pt;">SATUAN PELAYANAN <%= data.nama_uppkb.toUpperCase() %>
+              </div>
+              <div style="font-size: 9pt;">
+                <%= data.alamat_uppkb %>
+              </div>
+            </td>
+            <!-- <td style="width: 10%;"><img src="<%= qr %>" width="46" height="46" /></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </header>
+    <!-- <table width="100%" style="border-bottom: solid 2px #000000;">
+      <tbody>
+        <tr>
+          <td style="font-weight: bold; padding: 4px;">
+              <div style="font-size: 10px;"><%= data.nama_bptd.toUpperCase() %></div>
+              <div style="font-size: 10px;">SATUAN PELAYANAN <%= data.nama_uppkb.toUpperCase() %></div>
+              <div style="font-size: 9px;"><%= data.alamat_uppkb %></div>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+    <table style="width: 100%; text-align: center;">
+      <tr>
+        <td colspan="3" style="text-align: center; font-weight: bold; padding: 4px;">
+          <div style="font-size: 10pt; text-decoration: underline; text-align: center;">BUKTI PENIMBANGAN
+          </div>
+          <div style="font-size: 10pt; text-align: center;">
+            <%= data.kode_trx %>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <table class="table borderless" style="width: 100%; font-size: 10pt; margin-top: 8px;">
+      <tbody>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Tanggal</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.tanggal %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Jam</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.jam %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">No Kendaraan</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.no_kendaraan %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">No Uji</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.no_uji %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Masa Berlaku</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.tgl_masa_berlaku %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Pemilik</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.nama_pemilik %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Alamat</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <% if (data.alamat_pemilik !='undefined' && data.alamat_pemilik !='' ) { %>
+                            <%= data.alamat_pemilik %>
+                                <% } else { %>
+                                    <span>-</span>
+                                    <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">JBI</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <% if (Number(data.gandengan_jbki)> 0) { %>
+                            <%= data.gandengan_jbki %> Kg
+                                <% } else { %>
+                                    <%= data.jbi %> Kg
+                                        <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Berat Timbangan</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <% if (data.berat_timbang=='NaN' ) { %>
+                            0 Kg
+                            <% } else { %>
+                                <%= data.berat_timbang %> Kg
+                                    <% } %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Berat Lebih</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.kelebihan_berat %> Kg (<%= data.persen_lebih %> %)
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Kota Asal</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.asal_kota %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Kota Tujuan</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.tujuan_kota %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Muatan</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.muatan %>
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 37%; padding: 1px; font-weight: 600;">Pelanggaran</td>
+          <td style="width: 3%; font-weight: 600;">:</td>
+          <td style="width: 60%; padding: 1px; font-weight: 600;">
+            <%= data.pelanggaran %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div style="border-bottom: solid 1px #cccccc;">&nbsp;</div>
+    <table style="width: 100%;">
+      <tbody>
+        <tr>
+          <td style="width: 50%; font-size: 10px; font-weight: 600; text-align: center; vertical-align: top;">
+            <div>
+              <p>PENGEMUDI</p>
+              <p>&nbsp;</p>
+              <div style="margin: 0px; text-decoration: underline;">( ____________________ )</div>
+            </div>
+          </td>
+          <td style="width: 50%; font-size: 10px; font-weight: 600; text-align: center; vertical-align: top;">
+            <div>
+              <p>OPERATOR</p>
+              <p>&nbsp;</p>
+              <div style="margin: 0px; text-decoration: underline; text-transform: uppercase;">
+                ( <%= data.petugas %> )
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+  </div>
+  <div style="margin-top: 10mm; border: solid 1px #000000;"></div>
+
+</body>
+
+</html>

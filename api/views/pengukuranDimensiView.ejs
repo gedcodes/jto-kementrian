@@ -1,0 +1,698 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+
+    <!-- SECTION JUDUL FORMULIR -->
+    <section>
+      <table width="100%"
+        style="width: 100%; padding: 0px; margin-top: 4px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; text-align: center;">
+              <div style="font-size: 11px; ">
+                <b>
+                  FORMULIR PENGUKURAN DIMENSI KENDARAAN ANGKUTAN BARANG
+                </b>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION UPPKB / TANGGAL -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 1px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold; width: 10%; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">UPPKB</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: <%= data.detaildimensi_uppkb.nama.toUpperCase() %></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 10px; ">TANGGAL</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <div style="font-size: 10px;">: <%= moment(data.tgl_pengukuran).format('DD-MM-YYYY') %></div>
+            </td>
+          </tr> 
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION CATATAN PENGUKURAN -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 1px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px; ">CATATAN PENGUKURAN DIMENSI KENDARAAN</div>  
+            </td>
+            <td style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px; ">NO : </div>  
+            </td>
+          </tr>                               
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION DATA KENDARAAN -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 1px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td colspan="4" style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px; ">DATA KENDARAAN</div>  
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">1. Nomor Kendaraan</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: <%= data.detaildimensi_kendaraan.no_reg_kend %></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">2. Nomor Uji</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: <%= data.detaildimensi_kendaraan.no_uji %></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">3. Nama Pemilik</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: <%= data.detaildimensi_kendaraan.nama_pemilik %></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">4. Alamat</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: <%= data.detaildimensi_kendaraan.alamat_pemilik %></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">5. Merk/Type/Tahun</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: 
+                <%= data.detaildimensi_kendaraan.merek %> /
+                <%= data.detaildimensi_kendaraan.tipe %> /
+                <%= data.detaildimensi_kendaraan.tahun_rakit %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">6. Jenis/Macam</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: 
+                <%= data.detaildimensi_kendaraan.jenis_kend %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">7. Nomor/Tgl SRUT</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: 
+                <%= data.detaildimensi_kendaraan.no_srut %> /
+                <%= data.detaildimensi_kendaraan.tgl_srut ? moment(data.detaildimensi_kendaraan.tgl_srut).format('DD-MM-YYYY') : ''  %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">8. Nomor Rangka/Mesin</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: 
+                <%= data.detaildimensi_kendaraan.nomor_rangka %> /
+                <%= data.detaildimensi_kendaraan.no_mesin %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">9. Pabrik Pembuat (Perusahaan Karoseri)</div>  
+            </td>
+            <td style="padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 8px;">: 
+                <%= data.detaildimensi_kendaraan.pabrik_pembuat || '-' %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION TABEL URAIAN -->
+    <section>
+      <table width="100%" style="width: 100%; font-size: 10px; padding: 0px; margin-top: 1px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              NO
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              URAIAN
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              BUKU UJI
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              FISIK
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              KELEBIHAN
+            </td>
+          </tr>                               
+        </thead>
+        <tbody>
+          <!-- Jarak Sumbu (S1 - S2) -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              1.
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Jarak Sumbu
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              (S1 - S2)
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.jarak_sb_s1_s2_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.jarak_sb_s1_s2_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.jarak_sb_s1_s2_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- Jarak Sumbu (S2 - S3) -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              (S2 - S3)
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.jarak_sb_s2_s3_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.jarak_sb_s2_s3_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.jarak_sb_s2_s3_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- Jarak Sumbu (S3 - S4) -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              (S3 - S4)
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.jarak_sb_s3_s4_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.jarak_sb_s3_s4_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.jarak_sb_s3_s4_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- Lebar Total -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              2.
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              Lebar Total
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.lebar_total_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.lebar_total_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.lebar_total_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- Panjang Total -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              3.
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              Panjang Total
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.panjang_total_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.panjang_total_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.panjang_total_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- Tinggi Total -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              4.
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              Tinggi Total
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.tinggi_total_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.tinggi_total_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.tinggi_total_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- F O H -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              5.
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              F O H
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.foh_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.foh_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.foh_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- R O H -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              6.
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              R O H
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.roh_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.roh_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.roh_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- Dimensi Bak/Box/Tangki -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              7.
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              Dimensi Bak/Box/Tangki
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              a. Panjang
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.bbt_panjang_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.bbt_panjang_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.bbt_panjang_kelebihan %> mm
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              b. Lebar
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.bbt_lebar_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.bbt_lebar_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.bbt_lebar_kelebihan %> mm
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              c. Tinggi
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.bbt_tinggi_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.bbt_tinggi_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.bbt_tinggi_kelebihan %> mm
+            </td>
+          </tr>
+          <!-- Ukuran Ban -->
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              8.
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              Ukuran Ban
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              a. Sumbu I
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.ban_sb1_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.ban_sb1_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.ban_sb1_kelebihan %> mm
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              a. Sumbu II
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.ban_sb2_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.ban_sb2_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.ban_sb2_kelebihan %> mm
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: left;">
+              a. Sumbu III
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.ban_sb3_uji || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= data.ban_sb3_fisik || 0 %> mm
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 0px 0px; border-color: #595959; text-align: right;">
+              <%= dataKelebihan.ban_sb3_kelebihan %> mm
+            </td>
+          </tr>
+        </tbody>
+      </table>      
+    </section>
+
+    <!-- SECTION KETERANGAN UKUR -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 1px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px; ">KETERANGAN UKUR</div>  
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px;"><%= data.keterangan_ukur %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION CATATAN -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 1px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px; ">CATATAN</div>  
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px;"><%= data.catatan %></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION BUKU UJI -->
+    <section>
+      <table width="100%" style="font-size: 10px; width: 100%; padding: 0px; margin-top: 1px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td colspan="4" style="padding: 4px; text-align: left;">
+              <div style="font-size: 10px; ">BUKU UJI</div>  
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              JBB/JBKB
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : 
+              <%= data.detaildimensi_kendaraan.jbb || 0 %> kg /
+              <%= data.detaildimensi_kendaraan.jbkb || 0 %> kg
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Tempat/Tgl habis uji
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : 
+              <%= data.detaildimensi_kendaraan.lokasi_uji || 0 %> /
+              <%= data.detaildimensi_kendaraan.masa_berlaku_uji ? moment(data.detaildimensi_kendaraan.masa_berlaku_uji).format('DD-MM-YYYY') : ''  %>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Berat Kendaraan
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.berat_kosong || 0 %> kg
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Penguji
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.petugas_penguji || '-' %>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              - Sumbu I
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.sumbu_1 || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              - Sumbu II
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.sumbu_2 || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              - Sumbu III
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.sumbu_3 || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              - Sumbu IV
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.sumbu_4 || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Jumlah
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.jumlah || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Daya Angkut Orang ( <span><%= data.detaildimensi_kendaraan.daya_angkut_orang || 0 %></span> )
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.daya_angkut_orang_kg || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Daya Angkut Barang
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.daya_angkut_barang || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              JBI
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.jbi || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Muatan Sumbu Terberat
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.mst || 0 %> kg
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Kelas Jalan
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.kelas %>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 10px; padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: right;">
+            </td>
+            <td colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              Konfigurasi Sumbu
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 0px 0px 0px; border-color: #595959; text-align: left;">
+              : <%= data.detaildimensi_kendaraan.konfigurasi_sumbu %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <!-- SECTION FOOTER -->
+    <section>
+      <table width="100%" style="font-size: 10px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="width:25%; padding: 4px; text-align: center;">
+              <div>
+                <div>Pengemudi</div>
+                <p style="padding: 10px;">&nbsp;</p>
+                <div>( ........................................... )</div>
+              </div>
+            </td>
+            <td style="width: 40%; padding: 4px; text-align: center;">
+              &nbsp;
+            </td>
+            <td style="width: 35%; padding: 4px; text-align: center;">
+              <div>
+                <div><%= data.detaildimensi_uppkb.nama.toUpperCase() %>, <%= moment().format('DD - MM - YYYY') %></div>
+                <div>Penguji Kendaraan Bermotor</div>
+                <p style="padding: 10px;">&nbsp;</p>
+                <div>( <%= data.nama_penguji %> )</div>
+                <div>No Reg. Penguji : <%= data.no_reg_penguji %></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+<%- include ('default/footer.ejs') %>

@@ -1,0 +1,174 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; width: 100%; text-align: center;">
+              <% if (is_verifikasi == 0) { %>
+                <div style="font-weight: bold; font-size: 10pt; ">REKAPITULASI DATA LHR ANGKUTAN BARANG TIDAK MASUK UPPKB (BELUM VERIFIKASI)</div>  
+              <% } else { %>
+                <div style="font-weight: bold; font-size: 10pt; ">REKAPITULASI DATA LHR ANGKUTAN BARANG TIDAK MASUK UPPKB (SUDAH VERIFIKASI)</div>  
+              <% }%>
+            </td>
+          </tr>                            
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold; width: 10%; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">UPPKB</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: 
+                <% if (lokasi_id) { %>
+                <%= lokasi.nama.toUpperCase() %>
+                <% } else { %>
+                SEMUA UPPKB
+                <% } %>
+              </div>
+            </td>
+            <td rowspan="4" style="text-align: right;">
+              <img src="<%= qr %>" width="78" height="78" />
+              <p style="font-size: 8px; font-style: italic; margin: 0; padding: 0px 6px 0px 0px;"><%= moment().format('DD-MM-YYYY') %></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 10px; ">INTERVAL</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <div style="font-size: 10px;">: <%= datafilter.interval %></div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 10px; ">
+                <% if (interval <= 3) { %>
+                  TANGGAL
+                <% } else if (interval <= 4) { %>
+                  BULAN
+                <% } else { %>
+                  TAHUN
+                <% }%>  
+              </div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <div style="font-size: 10px;">: 
+                <% if (interval > 2) { %>
+                  <%= datafilter.jam_awal %> s.d <%= datafilter.jam_akhir %>
+                <% } else { %>
+                  <%= datafilter.tanggal %> <%= datafilter.jam_awal %> s.d <%= datafilter.jam_akhir %>
+                <% } %>
+              </div>
+            </td>
+          </tr>                            
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <table width="100%" style="width: 100%; font-size: 9px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              NO
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              WAKTU
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              PICKUP
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK DUMP BESAR
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK DUMP KECIL
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK STANDARDT BESAR
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK STANDARDT KECIL
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK TANGKI BESAR
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK TANGKI KECIL
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK TRAILER
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK BOX BESAR
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TRUCK BOX KECIL
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              JUMLAH
+            </td>                                                                                                                                                      
+          </tr>                               
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < data.length; i++) { %>
+          <tr>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= i+1 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <% if (interval == 4) { %>
+                <%= moment(data[i].waktu, 'MM-YYYY').locale('id').format('MMMM') %>
+              <% } else { %>
+                <%= data[i].waktu %>
+              <% } %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].pickup %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_dump_besar %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_dump_kecil %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_standardt_besar %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_standardt_kecil %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_tangki_besar %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_tangki_kecil %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_trailer %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_box_besar %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].truck_box_kecil %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].jml_ab %>
+            </td>                 
+          </tr>
+          <% } %>
+        </tbody>
+      </table>      
+    </section>
+  </div>
+
+<%- include ('default/footer.ejs') %>

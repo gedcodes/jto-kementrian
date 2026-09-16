@@ -1,0 +1,181 @@
+/* jshint indent: 2 */
+const sequelizePaginate = require('sequelize-paginate')
+const { v4: uuidv4 } = require('uuid');
+
+module.exports = function (sequelize, DataTypes) {
+    const detailpenanganan = sequelize.define('t_detail_penanganan', {
+        'id': {
+            type: DataTypes.UUID,
+            defaultValue: () => uuidv4(),
+            allowNull: false,
+            primaryKey: true,
+        },
+        'pengaduan_id': {
+            type: DataTypes.UUID,
+            allowNull: false,
+            comment: "null"
+        },
+        'penanganan_id': {
+            type: DataTypes.UUID,
+            allowNull: false,
+            comment: "null"
+        },
+        'aset_id': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'kode': {
+            type: DataTypes.STRING(30),
+            allowNull: true,
+            comment: "null"
+        },
+        'nama': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_name': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_url': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_name2': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_url2': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_name3': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_url3': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_name4': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'img_url4': {
+            type: DataTypes.STRING,
+            allowNull: true,
+            comment: "null"
+        },
+        'keterangan': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'kondisi_id': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'sub_kondisi_aset_id': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },                               
+        'created_at': {
+            type: DataTypes.DATE,
+            allowNull: true,
+            //defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+            comment: "null"
+        },
+        'updated_at': {
+            type: DataTypes.DATE,
+            allowNull: true,
+            //defaultValue: sequelize.literal('NOW() ON UPDATE NOW()'),
+            comment: "null"
+        },  
+        'deleted_at': {
+            type: DataTypes.DATE,
+            allowNull: true,
+            //defaultValue: sequelize.literal('NOW() ON UPDATE NOW()'),
+            comment: "null"
+        },               
+        'created_by': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'updated_by': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'is_active': {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: true,
+            comment: "null"
+        },
+        'is_deleted': {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+            comment: "null"
+        },
+        'deleted_by': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'status_detail': {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+            comment: "null"
+        },
+        'lokasi_uppkb_id': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+        'bptd_id': {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            comment: "null"
+        },
+    }, {
+        tableName: 'jt_detail_penanganan'
+    });
+    
+    detailpenanganan.associate = function (models) {
+        
+        detailpenanganan.belongsTo(models.t_aset, {
+            foreignKey: 'aset_id',
+            as: 'detailpenanganan_aset'
+        });
+        detailpenanganan.belongsTo(models.t_lokasi, {
+            foreignKey: 'lokasi_uppkb_id',
+            as: 'detailpenanganan_lokasi'
+        });
+        detailpenanganan.belongsTo(models.t_kondisi_aset, {
+            foreignKey: 'kondisi_id',
+            as: 'detailpenanganan_kondisi_aset'
+        });
+        detailpenanganan.belongsTo(models.t_sub_kondisi_aset, {
+            foreignKey: 'sub_kondisi_aset_id',
+            as: 'detailpenanganan_sub_kondisi_aset'
+        });
+    };
+
+    sequelizePaginate.paginate(detailpenanganan)
+
+    return detailpenanganan;
+};

@@ -1,0 +1,286 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold; width: 10%; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">UPPKB</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">: 
+                <% if (lokasi_id) { %>
+                <%= lokasi.nama.toUpperCase() %>
+                <% } else { %>
+                SEMUA UPPKB
+                <% } %>
+              </div>
+            </td>
+            <td rowspan="4" style="text-align: right;">
+              <img src="<%= qr %>" width="96" height="96" />
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 10px; ">TANGGAL</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <div style="font-size: 10px;">: <%= tanggal_awal %> s.d <%= tanggal_akhir %></div>
+            </td>
+          </tr>
+        <% if (is_cond) { %>
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 10px; ">SHIFT</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <div style="font-size: 10px;">: <%= resumedata.shift %></div>
+            </td>
+          </tr> 
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 10px; ">REGU</div>  
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <div style="font-size: 10px;">: <%= resumedata.regu %></div>
+            </td>
+          </tr>  
+        <% } %>                            
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <table width="100%" style="width: 100%; font-weight: bold; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; width: 25%; text-align: center;">
+              <div style="font-size: 10px; ">Jumlah Melanggar : <%= resumedata.jmlData %></div>  
+            </td>
+            <td style="padding: 4px; text-align: center;">
+              <div style="font-size: 10px;">Jumlah Belum Ditindak : <%= resumedata.jmlBelumDitindak %></div>
+            </td>
+            <td style="padding: 4px; width: 25%; text-align: center;">
+              <div style="font-size: 10px;">Jumlah Sudah Ditindak : <%= resumedata.jmlDitindak %></div>
+            </td>
+          </tr>                               
+        </tbody>
+      </table>      
+    </section>
+
+    <section>
+      <table width="100%" style="width: 100%; font-size: 8px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              NO
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              WAKTU
+            </td>
+            <% if (lokasi_id == undefined) { %>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              UPPKB
+            </td>
+            <% } %>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              NO KENDARAAN
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              NO UJI
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              JENIS KENDARAAN
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              SUMBU
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              JBI
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              HASIL TIMBANG
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              BERAT LEBIH
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              PERSEN LEBIH
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TOLERANSI
+            </td> 
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              KOMODITI
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              ASAL - TUJUAN
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              PELANGGARAN
+            </td>
+            <% if (is_cond) { %>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              SHIFT
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              REGU
+            </td> 
+            <% } %>                                                                                                                                               
+          </tr>                               
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < data.length; i++) { %>
+          <tr>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= i+1 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= moment(data[i].tgl_penimbangan).format('DD-MM-YYYY HH:mm:ss') %>
+            </td>
+            <% if (lokasi_id == undefined) { %>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].penimbangan_uppkb.nama %>
+            </td>
+            <% } %>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].no_kendaraan %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].no_uji %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].jenis_kendaraan.toUpperCase() %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <%= data[i].sumbu %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <% if (Number(data[i].gandengan_jbki) > 0) { %>
+                <%= data[i].gandengan_jbki %> Kg
+              <% } else { %>
+                <%= data[i].jbi_uji %> Kg
+              <% } %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+
+              <% if (data[i].berat_timbang == 'NaN') { %>
+                0 Kg
+              <% } else { %>
+                <%= data[i].berat_timbang %> Kg
+              <% } %>
+
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= data[i].kelebihan_berat %> Kg
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= parseFloat(data[i].prosen_lebih).toFixed(2) %> %
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= data[i].use_toleransi %> %
+            </td> 
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <% if (data.length > 0) { %>
+                <% if (data[i].penimbanganDetailMuatan) { %>
+                  <% var detKomoditi %>
+                  <% data[i].penimbanganDetailMuatan.forEach(function(val){ %>
+                    <% if (val.detailmuatankomoditi) { %>
+                    <% detKomoditi = val.detailmuatankomoditi.nama + ", " %>
+                    <%= detKomoditi.replace(/,*$/, "") %>
+                    <% } else { %>
+                      &nbsp;
+                    <% } %>
+                  <% }); %>
+                <% } %>
+              <% } %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <% if (data[i].penimbanganAsalKota) { %>
+              <%= data[i].penimbanganAsalKota.nama %>-<%= data[i].penimbanganTujuanKota.nama %>
+              <% } else { %>
+                -
+              <% } %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: left;">
+              <% data[i].penimbanganPelanggaran.forEach(function(val){ %>
+                <%= val.jenisPelanggaran.nama %>
+                <% if (data[i].penimbanganPelanggaran.length > 1) {%>,<% } %>
+              <% }); %>
+            </td>
+            <% if (is_cond) { %>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].penimbangan_shift.nama %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].penimbangan_regu.nama %>
+            </td>
+            <% } %>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>      
+    </section>
+    <% if (is_cond) { %>
+      <section>
+        <table width="100%" style="width: 100%; font-size: 9pt; padding: 0px; margin-top: 2px; border-spacing: 0px;">
+          <tbody>
+            <td style="width: 30%; padding: 4px; border-spacing: 0px; text-align: center;">
+              &nbsp;
+            </td>
+            <td style="width: 30%; padding: 4px; border-spacing: 0px; text-align: center;">
+              &nbsp;
+            </td>
+            <td style="width: 20%; padding: 4px; border-spacing: 0px; text-align: center;">
+              &nbsp;
+            </td>
+            <td style="width: 20%; padding: 4px; border-spacing: 0px; text-align: center; font-size: 10px;">
+              <div style="border: dotted 1px #cccccc; margin-top: 2px;">
+                <div style="padding-top: 6px;"><%= data[0].penimbangan_uppkb.nama %>, <span style="font-weight: bold;"><%= moment().format('DD - MM - YYYY') %></span></div>
+                <% if (Object.keys(danru).length > 0) { %>
+                  <div><b>KETUA REGU</b></div>
+                  <div style="height: 64px;">&nbsp;</div>
+                  <% if (danru.nama) { %>
+                  <div>
+                    <b>( <%= danru.nama.toUpperCase() %> )</b>
+                  </div>
+                  <div><%= danru.pangkat %></div>
+                  <div>NIP. <%= danru.nip %></div>
+                  <% } else { %>
+                  <div>
+                    <b>( ................................... )</b>
+                  </div>  
+                  <div>Pangkat / Golongan</div>
+                  <div>NIP. ...................................</div>
+                  <% } %>
+                <% } else { %>
+                  <div><b>KORSATPEL</b></div>
+                  <div style="height: 64px;">&nbsp;</div>
+                  <% if (korsatpel.nama) { %>
+                  <div>
+                    <b>( <%= korsatpel.nama.toUpperCase() %> )</b>
+                  </div>
+                  <div><%= korsatpel.pangkat %></div>
+                  <div>NIP. <%= korsatpel.nip %></div>
+                  <% } else { %>
+                  <div>
+                    <b>( ................................... )</b>
+                  </div>  
+                  <div>Pangkat / Golongan</div>
+                  <div>NIP. ...................................</div>
+                  <% } %>
+                <% } %>
+              </div>
+            </td>
+            <td style="width: 5%; padding: 4px; border-spacing: 0px; text-align: center;">
+              &nbsp;
+            </td>
+          </tbody>
+        </table>
+      </section>
+      <% } %>
+  </div>
+
+<%- include ('default/footer.ejs') %>

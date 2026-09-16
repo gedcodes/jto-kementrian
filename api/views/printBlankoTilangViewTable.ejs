@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CETAK PENINDAKAN</title>
+
+<body>
+    <style type="text/css">
+        html,
+        body {
+            width: 21cm;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            line-height: 0.9;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+    </head>
+
+    <body>
+
+        <div style="width: 100%; font-weight: 600; padding-left: 1.6cm; padding-right: 2.4cm; padding-top: 2.9cm;">
+
+            <table width="100%">
+                <tr>
+                    <td colspan="5" style="font-size: 14pt;"><strong></strong></td>
+                    <td colspan="4" style="font-size: 12pt; text-align: right;"><strong></strong></td>
+                </tr>
+                <tr>
+                    <td colspan="9" style="font-size: 14pt; text-align: center;">
+                        <strong></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9" style="font-size: 14pt; text-align: center;">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9" style="padding-right: 20px; font-size: 12pt; text-align: right;">
+                        <strong style="color: red; font-size: 20pt;"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"></td>
+                </tr>
+                <tr style="font-size: 10pt;">
+                    <td style="padding-top: 15px; width: 2%; text-align: left;"></td>
+                    <td style="padding-top: 15px; width: 10%; text-align: left;"></td>
+                    <td style="padding-top: 15px; width: 11%; text-align: right;">
+                        <%= data.hari %>
+                    </td>
+                    <td style="padding-top: 15px; width: 7%; text-align: left;"></td>
+                    <td style="padding-top: 15px; width: 14%; margin-left: 15px; text-align: left;">
+                        <%= data.tanggalPenindakan %>
+                    </td>
+                    <td style="padding-top: 15px; width: 2%; text-align: left;"></td>
+                    <td style="padding-top: 15px; width: 12%; text-align: left;">
+                        <%= data.jamPenindakan %>
+                    </td>
+                    <td style="padding-top: 15px; width: 3%; text-align: left;"></td>
+                    <td style="padding-top: 15px; width: 39%; text-align: center;">
+                        <%= data.nama_ppns %>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 5%; text-align: left;"></td>
+                    <td style="width: 30%; text-align: center;">
+                        <%= data.pangkat %>
+                    </td>
+                    <td style="width: 3%; text-align: left;"></td>
+                    <td style="width: 20%; text-align: center;">
+                        <%= data.nip %>
+                    </td>
+                    <td style="width: 40%; text-align: left;"></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 2px;">
+                <tr>
+                    <td style="width: 2%;"></td>
+                    <td style="width: 35%; text-align: justify;"></td>
+                    <td style="width: 28%; font-size: 9pt; margin-left: 5px; text-align: left;">
+                        <%= data.no_skep %>
+                    </td>
+                    <td style="width: 35%; font-size: 10pt; text-align: left;">
+                        <%= data.nama_bptd.toUpperCase() %>
+                    </td>
+                </tr>
+            </table>
+            <table style="margin-top: 9px;" width="100%">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 35%; text-align: left;"></td>
+                    <td style="width: 38%; text-align: center;">
+                        <%= data.nama_uppkb.toUpperCase() %>
+                    </td>
+                    <td style="width: 25%; text-align: right;"></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 1.5px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 15%; text-align: left;"></td>
+                    <td style="width: 4%; text-align: right;"></td>
+                    <td style="width: 34%; text-align: left;">
+                        <%= data.no_kendaraan %>
+                    </td>
+                    <td style="width: 4.8%; text-align: left;"></td>
+                    <td style="width: 1%; text-align: left;"></td>
+                    <td style="width: 2%;">
+                        <% if (data.kategori_jenis_kendaraan_id==1) { %>
+                            <strong>X</strong>
+                            <% } else { %>
+                                &nbsp;
+                                <% } %>
+                    </td>
+                    <td style="width: 7.7%; text-align: left;"></td>
+                    <td style="width: 2%; text-align: center;">
+                        <% if (data.kategori_jenis_kendaraan_id==2) { %>
+                            <strong>X</strong>
+                            <% } else { %>
+                                &nbsp;
+                                <% } %>
+                    </td>
+                    <td style="width: 7.5%; text-align: left;"></td>
+                    <td style="width: 4%; text-align: center;"><strong>&nbsp;</strong></td>
+                    <td style="width: 6%; text-align: left;"></td>
+                    <td style="width: 5%; padding-left: 5px; text-align: left;"><strong>&nbsp;</strong></td>
+                    <td style="width: 4%; text-align: right;"></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 1.5px; line-height: 1;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 21%;"></td>
+                    <td colspan="2" style="width: 41%; text-align: left;">
+                        <%= data.nama_pemilik %>
+                    </td>
+                    <td rowspan="2" style="width: 39%; text-align: left; margin-left: 10px; vertical-align: top;">
+                        <%= data.alamat_pemilik %>
+                    </td>
+                </tr>
+                <tr style="font-size: 10pt;">
+                    <td style="width: 21%;"></td>
+                    <td style="width: 28%; text-align: left;">
+                        <%= data.nama_pengemudi %>
+                    </td>
+                    <td style="width: 13%; text-align: left;">
+                        <%= data.umur_pengemudi %>
+                    </td>
+                </tr>
+            </table>
+            <!-- <table width="100%">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 15%; text-align: left;"></td>
+                    <td style="width: 4%; text-align: right;"></td>
+                    <td style="width: 24%; text-align: left;">
+                        <%= data.nama_pengemudi %>
+                    </td>
+                    <td style="width: 4.8%; text-align: left;"></td>
+                    <td style="width: 2; text-align: left;">
+                        <%= data.umur_pengemudi %>
+                    </td>
+                    <td style="width: 3.2%; text-align: left;"></td>
+                    <td style="width: 46%; text-align: left;"></td>
+                </tr>
+            </table> -->
+            <table width="100%" style="margin-top: 4px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 15%; text-align: left;"></td>
+                    <td style="width: 1%; text-align: right;"></td>
+                    <td style="width: 4%; text-align: right;">
+                        <% if (data.golSim=='A' ) { %>
+                            <strong>X</strong>
+                            <% } else { %>
+                                &nbsp;
+                                <% } %>
+                    </td>
+                    <td style="width: 1.2%; text-align: left;"></td>
+                    <td style="width: 2%; text-align: right;">
+                        <% if (data.golSim=='B1' ) { %>
+                            <strong>X</strong>
+                            <% } else { %>
+                                &nbsp;
+                                <% } %>
+                    </td>
+                    <td style="width: 1.8%; text-align: left;"></td>
+                    <td style="width: 2%; text-align: right;">
+                        <% if (data.golSim=='B2' ) { %>
+                            <strong>X</strong>
+                            <% } else { %>
+                                &nbsp;
+                                <% } %>
+                    </td>
+                    <td style="width: 2%; text-align: left;"></td>
+                    <td style="width: 2%; text-align: right;">
+                        <% if (data.golSim=='A' || data.golSim=='B1' || data.golSim=='B2' ) { %>
+                            &nbsp;
+                            <% } else { %>
+                                <strong>X</strong>
+                                <% } %>
+                    </td>
+                    <td style="width: 7%; text-align: left;"></td>
+                    <td style="width: 1.3%; text-align: left;"></td>
+                    <td style="width: 5%; text-align: left;">
+                        <% if (data.deskSim !='UMUM' ) { %>
+                            <strong>-------</strong>
+                            <% } else { %>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <% } %>
+                    </td>
+                    <td style="width: 11.2%; text-align: left;">
+                        <% if (data.deskSim=='UMUM' ) { %>
+                            <strong>--------------</strong>
+                            <% } else { %>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <% } %>
+                    </td>
+                    <td style="width: 40.5%; text-align: left;"></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 4px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 18%; text-align: left;"></td>
+                    <td style="width: 1%; text-align: right;"></td>
+                    <td style="width: 79%; margin-left: 50px; text-align: left;">
+                        <%= data.no_sim %>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 5px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 18%; text-align: left;"></td>
+                    <td style="width: 1%; text-align: right;"></td>
+                    <td style="width: 79%; margin-left: 50px; text-align: left;">
+                        <%= data.alamat_pengemudi.toUpperCase() %>
+                    </td>
+                </tr>
+            </table>
+            <table style="margin-top: 10px;" width="100%">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 83%; text-align: left;"></td>
+                    <td style="width: 15%; text-align: center;"></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 17px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 92%; text-align: center;">
+                        <%= data.pasal.toUpperCase() %>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 5px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 58%; text-align: left;"></td>
+                    <td style="width: 40%; text-align: center;">
+                        <%= data.pengadilan.toUpperCase() %>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 4px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 12%; text-align: left;"></td>
+                    <td style="width: 1%;"></td>
+                    <td style="width: 7%; margin-left: 4px; text-align: center;">
+                        <%= data.hari_sidang %>
+                    </td>
+                    <td style="width: 15%; text-align: center;">
+                        <%= data.tgl_sidang %>
+                    </td>
+                    <td style="width: 7%; text-align: left;"></td>
+                    <td style="width: 56%; text-align: left;">
+                        <%= data.jam_sidang %>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 98%; text-align: left;"></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 15px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 2%;"></td>
+                    <td style="width: 45%; text-align: left;"></td>
+                    <td style="width: 1%;"></td>
+                    <td style="width: 17%; text-align: center;">
+                        <%= data.no_uji %>
+                    </td>
+                    <td style="width: 17%; text-align: center;">
+                        <%= data.tgl_uji %>
+                    </td>
+                    <td style="width: 16%; text-align: center;">
+                        <%= data.tgl_masa_berlaku %>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 70px;">
+                <tr style="font-size: 11pt; font-weight: 500; letter-spacing: 1.5px;">
+                    <td style="width: 42%; text-align: right;">ID Tiket E-Tilang</td>
+                    <td style="width: 4%; text-align: center;">:</td>
+                    <td style="width: 54%; text-align: left;"><%= data.etilang_ticket_id ? data.etilang_ticket_id.toUpperCase() : '-' %></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 2px;">
+                <tr style="font-size: 11pt; font-weight: 500; letter-spacing: 1.5px;">
+                    <td style="width: 42%; text-align: right;">Kode Briva</td>
+                    <td style="width: 4%; text-align: center;">:</td>
+                    <td style="width: 54%; text-align: left;"><%= data.kode_briva ? data.kode_briva : '-' %></td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 1px;">
+                <tr style="font-size: 10pt;">
+                    <td style="width: 2%;"></td>
+                    <td style="width: 26%; margin-left: 80px; text-align: center; vertical-align: top;">
+                        <%= data.nama_pengemudi %>
+                    </td>
+                    <td style="width: 48%; text-align: center;"></td>
+                    <td style="width: 24%; margin-right: 50px; text-align: center;">
+                        <div style="line-height: 1;">
+                            <%= data.nama_ppns %>
+                        </div>
+                        <div>NIP. <%= data.nip %>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,358 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+
+    <!-- SECTION JUDUL -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin: 4px 0; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td style="padding: 4px; width: 100%; text-align: center;">
+              <div style="font-weight: bold; font-size: 12pt; ">LAPORAN <%= resumedata.intervalString %> <%= namahead.toUpperCase() %></div>  
+              <div style="font-weight: bold; font-size: 12pt; "><%= blnText.toUpperCase() %> <%= tahun %></div>  
+            </td>
+          </tr>                               
+        </tbody>
+      </table>      
+    </section>
+
+    <!-- SECTION TABEL -->
+    <section>
+      <table width="100%" style="width: 100%; font-size: 7px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <th rowspan="3" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No 
+            </th>
+            <th rowspan="3" colspan="1" style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <br />
+              <% if (lokasi) { %>
+                <% if (resumedata.interval=='bulan' ) { %>
+                  <span>Waktu (Tanggal)</span>
+                <% } else { %>
+                  <span>Waktu (Bulan)</span>
+                <% } %>
+              <% } else { %>
+                <span>Lokasi UPPKB</span>
+              <% } %>
+            </th>
+            <th rowspan="1" colspan="3" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Jumlah Kendaraan
+            </th>
+            <th rowspan="1" colspan="6" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Pelanggaran
+            </th>
+            <th rowspan="1" colspan="4" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Penindakan
+            </th>
+            <th rowspan="1" colspan="6" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Penindakan Lainnya
+            </th>
+          </tr>
+          <tr style="font-weight: bold;">
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Diperiksa 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Melanggar 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tidak Melanggar 
+            </th>                        
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Daya Angkut 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Dimensi 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Persyaratan Teknis 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Dokumen
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tata Cara Muat 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kelas Jalan 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Peringatan 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tilang 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kepolisian 
+            </th>
+            <th rowspan="1" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tilang UPPKB Lain / Tilang Lainnya 
+            </th>
+            <th rowspan="1" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Penundaan Perjalanan 
+            </th>
+            <th rowspan="1" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Penyesuaian Muatan / Transfer Muat 
+            </th>
+            <th rowspan="1" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Penandaan Kelebihan Dimensi 
+            </th>
+            <th rowspan="1" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Penyesuaian Persyaratan Teknis 
+            </th>
+            <th rowspan="1" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Penyesuaian Tata Cara Muat 
+            </th>
+            <th rowspan="1" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Putar Balik 
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var totalJmlTimbang = 0; %>
+          <% var totalJmlMelanggar = 0; %>
+          <% var totalJmlTidakMelanggar = 0; %>
+          <% var totalTilangUppkbLain = 0; %>
+          <% var totalDayaAngkut = 0; %>
+          <% var totalDimensi = 0; %>
+          <% var totalPersyaratanTeknis = 0; %>
+          <% var totalDokumen = 0; %>
+          <% var totalTataCaraMuat = 0; %>
+          <% var totalKelasJalan = 0; %>
+          <% var totalPeringatan = 0; %>
+          <% var totalTilang = 0; %>
+          <% var totalKepolisian = 0; %>
+          <% var totalJmlPenandaanKelebihanDimensi = 0; %>
+          <% var totalJmlTransferMuat = 0; %>
+          <% var totalJmlPenyesuaianTataCaraMuat = 0; %>
+          <% var totalJmlPenyesuaianPersyaratanTeknis = 0; %>
+          <% var totalJmlPenundaanPerjalanan = 0; %>
+          <% var totalJmlPutarBalik = 0; %>
+
+          <% for (var i = 0; i < data.length; i++) { %>
+
+          <% totalJmlTimbang = Number(totalJmlTimbang) + Number(data[i].jml_timbang || 0) %>
+          <% totalJmlMelanggar = Number(totalJmlMelanggar) + Number(data[i].jml_melanggar || 0) %>
+          <% totalJmlTidakMelanggar = Number(totalJmlTidakMelanggar) + Number(data[i].jml_tidak_melanggar || 0) %>
+          <% totalTilangUppkbLain = Number(totalTilangUppkbLain) + Number(data[i].tilang_uppkb_lain || 0) %>
+          <% totalDayaAngkut = Number(totalDayaAngkut) + Number(data[i].daya_angkut || 0) %>
+          <% totalDimensi = Number(totalDimensi) + Number(data[i].dimensi || 0) %>
+          <% totalPersyaratanTeknis = Number(totalPersyaratanTeknis) + Number(data[i].persyaratan_teknis || 0) %>
+          <% totalDokumen = Number(totalDokumen) + Number(data[i].dokumen || 0) %>
+          <% totalTataCaraMuat = Number(totalTataCaraMuat) + Number(data[i].tata_cara_muat || 0) %>
+          <% totalKelasJalan = Number(totalKelasJalan) + Number(data[i].kelas_jalan || 0) %>
+          <% totalPeringatan = Number(totalPeringatan) + Number(data[i].peringatan || 0) %>
+          <% totalTilang = Number(totalTilang) + Number(data[i].tilang || 0) %>
+          <% totalKepolisian = Number(totalKepolisian) + Number(data[i].kepolisian || 0) %>
+          <% totalJmlPenandaanKelebihanDimensi = Number(totalJmlPenandaanKelebihanDimensi) + Number(data[i].penandaan_kelebihan_dimensi || 0) %>
+          <% totalJmlTransferMuat = Number(totalJmlTransferMuat) + Number(data[i].transfer_muat || 0) %>
+          <% totalJmlPenyesuaianTataCaraMuat = Number(totalJmlPenyesuaianTataCaraMuat) + Number(data[i].penyesuaian_tata_cara_muat || 0) %>
+          <% totalJmlPenyesuaianPersyaratanTeknis = Number(totalJmlPenyesuaianPersyaratanTeknis) + Number(data[i].penyesuaian_persyaratan_teknis || 0) %>
+          <% totalJmlPenundaanPerjalanan = Number(totalJmlPenundaanPerjalanan) + Number(data[i].penundaan_perjalanan || 0) %>
+          <% totalJmlPutarBalik = Number(totalJmlPutarBalik) + Number(data[i].putar_balik || 0) %>
+
+          <tr>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              <%= i+1 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <% if (lokasi) { %>
+                <% if (resumedata.interval=='bulan' ) { %>
+                  <%= moment(data[i].waktu).format('DD-MM-YYYY') %>
+                <% } else { %>
+                  <%= data[i].waktu %>
+                <% } %>
+              <% } else { %>
+                <%= data[i].nama_uppkb %>
+              <% } %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_timbang || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_melanggar || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_tidak_melanggar || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].daya_angkut || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].dimensi || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].persyaratan_teknis || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].dokumen || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].tata_cara_muat || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].kelas_jalan || 0 %>
+            </td>            
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].peringatan || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].tilang || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].kepolisian || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].tilang_uppkb_lain || 0 %>
+            </td>            
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].penandaan_kelebihan_dimensi || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].transfer_muat || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].penyesuaian_tata_cara_muat || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].penyesuaian_persyaratan_teknis || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].penundaan_perjalanan || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].putar_balik || 0 %>
+            </td> 
+          </tr>
+          <% } %>
+          <tr style="font-weight: bold; background-color: lightgray;">
+            <td rowspan="1" colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: right;">
+              TOTAL
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlTimbang %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlMelanggar %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlTidakMelanggar %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalDayaAngkut %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalDimensi %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalPersyaratanTeknis %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalDokumen %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalTataCaraMuat %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalKelasJalan %>
+            </td>            
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalPeringatan %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalTilang %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalKepolisian %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalTilangUppkbLain %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlPenandaanKelebihanDimensi %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlTransferMuat %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlPenyesuaianTataCaraMuat %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlPenyesuaianPersyaratanTeknis %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlPenundaanPerjalanan %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalJmlPutarBalik %>
+            </td>            
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION FOOTER -->
+    <% if (lokasi) { %>
+    <section>
+      <table width="100%" style="width: 100%; font-size: 9pt; padding: 0px; margin-top: 2px; border-spacing: 0px;">
+        <tbody>
+          <td colspan="2"
+            style="width: 50%; padding: 4px; border-spacing: 0px; text-align: left; vertical-align: top; font-size: 12px;">
+            &nbsp;
+          </td>
+          <td style="width: 20%; padding: 4px; border-spacing: 0px; text-align: center;">
+            &nbsp;
+          </td>
+          <td style="width: 30%; padding: 4px; border-spacing: 0px; text-align: center;">
+            <div style="border: dotted 1px #cccccc; margin-top: 2px;">
+              <div>
+                <%= namahead.toUpperCase() %>, <%= moment().format('DD - MM - YYYY') %>
+              </div>
+              <div><b>KORSATPEL</b></div>
+              <div style="height: 64px;">&nbsp;</div>
+              <% if (korsatpel !='' ) { %>
+                <div>
+                  <b>( <%= korsatpel.nama.toUpperCase() %> )</b>
+                </div>
+                <div>
+                  <%= korsatpel.pangkat %>
+                </div>
+                <div>NIP. <%= korsatpel.nip %>
+                </div>
+                <% } else { %>
+                  <div>
+                    <b>( ................................... )</b>
+                  </div>
+                  <div>Pangkat / Golongan</div>
+                  <div>NIP. ...................................</div>
+                  <% } %>
+            </div>
+          </td>
+          <td style="width: 5%; padding: 4px; border-spacing: 0px; text-align: center;">
+            &nbsp;
+          </td>
+        </tbody>
+      </table>
+    </section>
+    <% } %>
+    <section>
+      <table width="100%" style="width: 100%; font-size: 9pt; padding: 0px; margin-top: 2px; border-spacing: 0px;">
+        <tbody>
+          <td>
+            <div>
+              <div>* Catatan : Jika ada penyesuaian muatan dan penyesuaian dimensi, maka diisi dikolom penindakan sesuai dengan tindakan yang diambil</div>
+              <div>* Penindakan Kepolisian adalah jika pengemudi menunjukkan telah dilakukan penindakan oleh Aparat Kepolisian</div>
+              <div>* Tunda Perjalanan merupakan tindakan lanjutan dari penindakan yang diberikan</div>
+              <div>* Tilang UPPKB lain adalah jika pengemudi menunjukkan bahwa telah ditilang oleh UPPKB lainnya</div>
+              <div>* Tilang lainnya adalah jika pengemudi menunjukkan bahwa telah ditilang oleh PPNS di Jalan (Operasi Gabungan)</div>
+            </div>
+          </td>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+<%- include ('default/footer.ejs') %>

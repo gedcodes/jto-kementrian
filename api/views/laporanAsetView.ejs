@@ -1,0 +1,213 @@
+<%- include ('default/header.ejs') %>
+  <div style="margin: 4px;">
+    <header>
+      <%- include ('report/header_report.ejs') %>
+    </header>
+
+    <!-- SECTION JUDUL -->
+    <section>
+      <table width="100%" style="width: 100%; padding: 0px; margin: 4px 0; border-spacing: 0px; border-style: solid; border-width: 1px 1px 1px 1px; border-color: #595959;">
+        <tbody>
+          <tr>
+            <td colspan="2" style="padding: 4px; width: 100%; text-align: center;">
+              <div style="font-weight: bold; font-size: 12pt; ">LAPORAN DATA MANAJEMEN ASET</div>
+            </td>
+          </tr>  
+          <tr>
+            <td style="font-weight: bold; width: 10%; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px; ">LOKASI</div>
+            </td>
+            <td style="font-weight: bold; padding: 4px; vertical-align: bottom;">
+              <div style="font-size: 10px;">:
+                <% if (resumedata.filter == 'BPTD') { %>
+                  <%= resumedata.namabptd.toUpperCase() %>
+                  <% } else if (resumedata.filter == 'UPPKB') { %>
+                    <%= resumedata.namauppkb.toUpperCase() %>
+                    <% } else { %>
+                      SEMUA UPPKB
+                      <% } %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold; padding: 4px; width: 10%; vertical-align: top;">
+              <div style="font-size: 10px; ">
+                <% if (resumedata.tahun) { %>
+                  TAHUN
+                  <% } %>
+              </div>
+            </td>
+            <td style="font-weight: bold; padding: 4px; width: 75%; vertical-align: top;">
+              <% if (resumedata.tahun) { %>
+                <div style="font-size: 10px;">:
+                  <%= resumedata.tahun %>
+                </div>
+                <% } %>
+            </td>
+          </tr>
+        </tbody>
+      </table>      
+    </section>
+
+    <!-- SECTION TABEL -->
+    <section>
+      <table width="100%" style="width: 100%; font-size: 7px; padding: 0px; margin-top: 2px; border-spacing: 0px; border-style: solid; border-width: 1px 0px 1px 1px; border-color: #595959;">
+        <thead>
+          <tr style="font-weight: bold;">
+            <th rowspan="3" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              No 
+            </th>
+            <th rowspan="3" colspan="1" style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              BPTD
+            </th>
+            <th rowspan="3" colspan="1" style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              UPPKB
+            </th>
+            <th rowspan="3" colspan="1" style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Jumlah Aset
+            </th>
+            <th rowspan="1" colspan="2" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Kondisi
+            </th>
+            <th rowspan="1" colspan="4" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Status Kondisi
+            </th>
+            <th rowspan="3" colspan="1" style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Jumlah Aset Pengaduan
+            </th>
+            <th rowspan="3" colspan="1" style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Jumlah Aset Penanganan
+            </th>
+            <th rowspan="3" colspan="1" style="padding: 4px; width: 10%; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Jumlah Aset Usulan
+            </th>
+          </tr>
+          <tr style="font-weight: bold;">
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Berfungsi
+            </th>                        
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Tidak Berfungsi 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Normal
+            </th>                        
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Up Normal 
+            </th>
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Rusak
+            </th>                        
+            <th rowspan="2" colspan="1" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              Hilang 
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% var totalAset = 0; %>
+          <% var totalBerfungsi = 0; %>
+          <% var totalTidakBerfungsi = 0; %>
+          <% var totalNormal = 0; %>
+          <% var totalUpNormal = 0; %>
+          <% var totalRusak = 0; %>
+          <% var totalHilang = 0; %>
+          <% var totalPengaduan = 0; %>
+          <% var totalPenanganan = 0; %>
+          <% var totalUsulan = 0; %>
+
+          <% for (var i = 0; i < data.length; i++) { %>
+
+          <% totalAset = Number(totalAset) + Number(data[i].total || 0) %>
+          <% totalBerfungsi = Number(totalBerfungsi) + Number(data[i].jumlah_berfungsi || 0) %>
+          <% totalTidakBerfungsi = Number(totalTidakBerfungsi) + Number(data[i].jumlah_tidak_berfungsi || 0) %>
+          <% totalNormal = Number(totalNormal) + Number(data[i].jumlah_normal || 0) %>
+          <% totalUpNormal = Number(totalUpNormal) + Number(data[i].jumlah_upnormal || 0) %>
+          <% totalRusak = Number(totalUpNormal) + Number(data[i].jumlah_rusak || 0) %>
+          <% totalHilang = Number(totalUpNormal) + Number(data[i].jumlah_hilang || 0) %>
+          <% totalPengaduan = Number(totalUpNormal) + Number(data[i].jml_pengaduan || 0) %>
+          <% totalPenanganan = Number(totalUpNormal) + Number(data[i].jml_penanganan || 0) %>
+          <% totalUsulan = Number(totalUpNormal) + Number(data[i].jml_usulan || 0) %>
+
+          <tr>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= i+1 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].nama_bptd || '' %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].nama_uppkb || '' %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].total || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jumlah_berfungsi || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jumlah_tidak_berfungsi || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jumlah_normal || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jumlah_upnormal || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jumlah_rusak || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jumlah_hilang || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_pengaduan || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_penanganan || 0 %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= data[i].jml_usulan || 0 %>
+            </td>
+          </tr>
+          <% } %>
+          <tr style="font-weight: bold; background-color: lightgray;">
+            <td rowspan="1" colspan="3" style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              TOTAL
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalAset %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalBerfungsi %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalTidakBerfungsi %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalNormal %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalUpNormal %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalRusak %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalHilang %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalPengaduan %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalPenanganan %>
+            </td>
+            <td style="padding: 4px; border-spacing: 0px; border-style: solid; border-width: 0px 1px 1px 0px; border-color: #595959; text-align: center;">
+              <%= totalUsulan %>
+            </td>         
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+<%- include ('default/footer.ejs') %>

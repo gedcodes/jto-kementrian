@@ -76,6 +76,7 @@ const path = require("path");
 var url = require('url');
 const axios = require('axios');
 const AxiosDigestAuth = require('@mhoc/axios-digest-auth').default;
+const { execFile } = require('child_process');
 var tcp = require('../tcpclient');
 
 // Saklar sinkronisasi realtime penimbangan ke server pusat saat create/update.
@@ -3644,6 +3645,22 @@ const PenimbanganController = () => {
         return dataJtoServerHistori;
     }
 
+    const isJpeg = (data) => !!data && data.length > 2 && data[0] === 0xFF && data[1] === 0xD8;
+
+    const captureFrameRtsp = (rtspUrl) => {
+        return new Promise((resolve) => {
+            execFile('ffmpeg', ['-loglevel', 'error', '-rtsp_transport', 'tcp', '-i', rtspUrl, '-frames:v', '1', '-q:v', '2', '-f', 'image2', '-vcodec', 'mjpeg', 'pipe:1'],
+                { encoding: 'buffer', timeout: 15000, maxBuffer: 20 * 1024 * 1024 },
+                (error, stdout) => {
+                    if (error) {
+                        console.log('Capture RTSP gagal:', error.message.replace(/\/\/[^@\s]+@/g, '//***@'));
+                        return resolve(null);
+                    }
+                    resolve(stdout);
+                });
+        });
+    }
+
     const captureImg = async (kode_uppkb, lokasi_id, no_kendaraan, timbangan_id) => {
 		console.log("--------------------::Processing Capture CCTV::--------------------");
 		try {
@@ -3683,27 +3700,53 @@ const PenimbanganController = () => {
 						var authUsername = auth.split(":")[0];
 						var authPassword = auth.split(":")[1];
 						var urlCaptureApi = `http://${host}/ISAPI/${pathname}/${process.env.CAPTURE_PARAMS}`;
-						
+
 						const digestAuth = new AxiosDigestAuth({
 							username: `${authUsername}`,
 							password: `${authPassword}`,
 						});
 
-						const response = await digestAuth.request({
-							headers: { Accept: "*/*" },
-							responseType: "arraybuffer",
-							method: "GET",
-							url: urlCaptureApi,
-							timeout: 10000 // tambah timeout 10 detik
-						});
+						// Kamera ANPR Hikvision (mis. DS-TCG406-E) membalas 200 tapi 0 byte untuk
+						// channel 101/102, snapshot-nya ada di channel 1. Coba berurutan, lalu
+						// fallback ambil 1 frame dari RTSP dengan ffmpeg.
+						const snapshotUrls = [
+							urlCaptureApi,
+							`http://${urlparse.hostname}/ISAPI/Streaming/channels/1/picture`,
+						];
+						var imageData = null;
+						for (const snapshotUrl of snapshotUrls) {
+							try {
+								const response = await digestAuth.request({
+									headers: { Accept: "*/*" },
+									responseType: "arraybuffer",
+									method: "GET",
+									url: snapshotUrl,
+									timeout: 10000 // tambah timeout 10 detik
+								});
+								if (isJpeg(response.data)) {
+									imageData = Buffer.from(response.data);
+									break;
+								}
+								console.log(`Snapshot camera ${i+1} kosong/bukan JPEG: ${snapshotUrl.replace(/\?.*/, '')}`);
+							} catch (snapshotError) {
+								console.log(`Snapshot camera ${i+1} gagal: ${snapshotUrl.replace(/\?.*/, '')} - ${snapshotError.message}`);
+							}
+						}
+						if (!imageData) {
+							imageData = await captureFrameRtsp(arr[i]);
+							if (!isJpeg(imageData)) {
+								throw new Error('Snapshot ISAPI dan RTSP tidak menghasilkan gambar');
+							}
+							console.log(`Camera ${i+1} di-capture dari RTSP (ffmpeg)`);
+						}
 
 						const file_name = kode_uppkb + '_' + no_kendaraan + '_timbangan_' + timbangan_id + '_' + moment().format('YYYY_MM_DD_HH_mm_ss') + '_' + moment().valueOf() + '_' + (i + 1) + '.jpg';
 						const uploadPath = path.join(config.path_upload) + '/penimbangan/' + file_name;
 						const imageUrl = `${config.image_url}penimbangan/${file_name}`;
 
 						// Gunakan fs.writeFileSync atau await fs.promises.writeFile
-						await fs.promises.writeFile(uploadPath, response.data);
-						
+						await fs.promises.writeFile(uploadPath, imageData);
+
 						arrcapture.push({
 							'filename': file_name,
 							'imageUrl': imageUrl,

@@ -69,3 +69,5 @@ yarn.lock
 # db sqlite
 
 db/database.sqlite
+
+backup_db.dump

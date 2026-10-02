@@ -4332,14 +4332,7 @@ const PenimbanganController = () => {
                                 let jenis_kendaraan_id = req.body.jenis_kendaraan ? await getJenisKendaraanId(req.body.jenis_kendaraan) : null;
                                 let sumbu_id = req.body.sumbu ? await getSumbuId(req.body.sumbu) : null;
 
-                                if (arrkomoditi.length < 1) {
-                                    console.log('KOMODITI : ', arrkomoditi);
-                                    console.log('Komoditi Tidak Boleh Kosong');
-                                    res.send({
-                                        success: false,
-                                        message: 'Komoditi Tidak Boleh Kosong',
-                                    });
-                                } else if (jenis_kendaraan_id == 0) {
+                                if (jenis_kendaraan_id == 0) {
                                     res.send({
                                         success: false,
                                         message: 'Jenis Kendaraan Tidak Teridentifikasi',
